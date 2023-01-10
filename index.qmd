@@ -1,0 +1,30 @@
+---
+title: ""
+format:
+  html: 
+    page-layout: custom
+---
+
+::: {.grid}
+::: {.g-col-1}
+<!-- Left margin -->
+:::
+
+::: {.g-col-4}
+![Fig 1: Scientist wearing a beanie](headshot.jpg)
+:::
+
+::: {.g-col-6}
+# Max Czapanskiy
+
+**Ecology \| Data Science**
+
+Postdoctoral scholar with NOAA's Southwest Fisheries Science Center and UC Santa Cruz's Ocean Sciences Department working at the intersection of ecology and software engineering. I develop educational resources and computational tools that promote open science.
+
+[<i class="bi bi-github"></i>](https://github.com/FlukeAndFeather) [{{< ai google-scholar >}}](https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en) [{{< ai orcid >}}](https://orcid.org/0000-0002-6302-905X)
+:::
+
+::: {.g-col-1}
+<!-- Right margin -->
+:::
+:::

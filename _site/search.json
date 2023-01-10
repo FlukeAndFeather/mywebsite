@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Max Czapanskiy | Ecology and Data Science",
+    "section": "",
+    "text": "Fig 1: Scientist wearing a beanie standing outside of a coffee shop"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Max Czapanskiy",
+    "section": "",
+    "text": "My work advances ecological data science at multiple scales. I teach scientists how to use software engineering principles to make the most of their data, I develop tools for visualizing and analyzing big data, and I advocate for open science practices and policies.\nCurrently, I’m a postdoctoral scholar with NOAA’s Southwest Fisheries Science Center and UC Santa Cruz’s Ocean Sciences Department. In this role, I’m developing new software and publishing data to support marine resource management in California and the Antarctic. During my graduate studies, I created and taught a course called Just Enough Software Engineering (for Scientists) for the Stanford Biosciences Program. I also developed novel computational methods for deciphering biological signals in animal-borne sensor data (featured in Vox)."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Max Czapanskiy",
+    "section": "Education",
+    "text": "Education\nStanford University | Stanford, CA\nPhD in Biology | 2022\nSan Francisco State University | San Francisco, CA\nMS in Geographic Information Science | 2018\nColumbia University | New York, NY\nBS in Computer Science | 2014"
+  },
+  {
+    "objectID": "index.html#max-czapanskiy",
+    "href": "index.html#max-czapanskiy",
+    "title": "Max Czapanskiy | Ecology and Data Science",
+    "section": "Max Czapanskiy",
+    "text": "Max Czapanskiy\n\nEcology | Data Science"
+  },
+  {
+    "objectID": "teaching.html",
+    "href": "teaching.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "I developed and taught jese4sci to address both scientific and pedagogical challenges. The jese4sci curriculum contained the essential software engineering skills that facilitate open science, like version control and documentation (see course map below). Because most students come in with different experience levels and goals, I designed the course to be self-directed and mastery-oriented, which allowed students to move at the pace and focus on the material best suited to their growth. Here’s an example lesson and assignment from the validation track on GitHub.\n\n\n\njese4sci course map"
+  },
+  {
+    "objectID": "teaching.html#the-carpentries",
+    "href": "teaching.html#the-carpentries",
+    "title": "Teaching",
+    "section": "The Carpentries",
+    "text": "The Carpentries\nI’m a certified Carpentries instructor since 2019. I’ve taught Software and Data Carpentry workshops in-person and online for the Stanford Libraries and other other organizations."
+  },
+  {
+    "objectID": "teaching.html#research-mentorship",
+    "href": "teaching.html#research-mentorship",
+    "title": "Teaching",
+    "section": "Research Mentorship",
+    "text": "Research Mentorship\nI’m passionate about sharing my data skills with other scientists to help them develop their own abilities and make their research more impactful. I’ve mentored scientists at all career stages, from undergraduate and graduate students to post-docs and faculty. These efforts supported publications in The Journal of Experimental Biology, Nature Communications, and Current Biology. If you’d like to develop your data science skills and have a research project that you want to be more open and reproducible, please contact me!"
+  }
+]

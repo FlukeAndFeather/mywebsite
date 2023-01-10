@@ -1,0 +1,31 @@
+---
+title: "Max Czapanskiy"
+about:
+  template: trestles
+  image: profile.jpg
+  links: 
+    - icon: github
+      href: https://github.com/FlukeAndFeather
+    - text: "{{< ai google-scholar >}}"
+      href: https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en
+    - text: "{{< ai orcid >}}"
+      href: https://orcid.org/0000-0002-6302-905X
+---
+
+My work advances ecological data science at multiple scales. I teach scientists how to use software engineering principles to make the most of their data, I develop tools for visualizing and analyzing big data, and I advocate for open science practices and policies.
+
+Currently, I'm a postdoctoral scholar with NOAA's Southwest Fisheries Science Center and UC Santa Cruz's Ocean Sciences Department. In this role, I'm developing new software and publishing data to support marine resource management in California and the Antarctic. During my graduate studies, I created and taught a course called *Just Enough Software Engineering (for Scientists)* for the Stanford Biosciences Program. I also developed novel computational methods for deciphering biological signals in animal-borne sensor data (featured in [Vox](https://www.vox.com/down-to-earth/2022/8/11/23291991/largest-animal-blue-whale-heartbeat)).
+
+## Education
+
+**Stanford University** \| Stanford, CA
+
+PhD in Biology \| 2022
+
+**San Francisco State University** \| San Francisco, CA
+
+MS in Geographic Information Science \| 2018
+
+**Columbia University** \| New York, NY
+
+BS in Computer Science \| 2014
