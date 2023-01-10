@@ -45,16 +45,32 @@ format_authors <- function(authors) {
   paste(authors_short, collapse = ", ")
 }
 
+# Find path to PDF file
+find_pdf <- function(authors, year, title) {
+  lead_author <- stringr::str_extract(authors[1], "[^ ]+$")
+  title_short <- title |>
+    stringr::str_replace_all("[^a-zA-Z \\-]", "") |>
+    substr(1, 30)
+  pdf_pattern <- glue::glue("{lead_author}.*- {year} - {title_short}")
+  dir(here::here("assets", "papers"), 
+      pattern = pdf_pattern,
+      ignore.case = TRUE) |>
+    (\(pdf) file.path("assets", "papers", pdf))()
+}
+
 # Read bib file
 pubs <- bib2df::bib2df("assets/works.bib") |>
   # Retain relevant fields and format author list
-  dplyr::transmute(authors = purrr::map_chr(AUTHOR, format_authors),
-                   title = TITLE,
-                   journal = JOURNAL,
-                   year = YEAR) |>
+  dplyr::transmute(
+    authors = purrr::map_chr(AUTHOR, format_authors),
+    title = TITLE,
+    journal = JOURNAL,
+    year = YEAR,
+    pdf = purrr::pmap_chr(list(AUTHOR, YEAR, TITLE), find_pdf)
+  ) |>
   # Format in HTML. Markdown doesn't support reverse ordered lists??
   dplyr::mutate(
-    pub_html = glue::glue("<li>{authors}. ({year}). {title}. <em>{journal}</em>.</li>")
+    pub_html = glue::glue("<li>{authors}. ({year}). {title}. <em>{journal}</em>. <a href=\"{pdf}\" target=\"_blank\">PDF</a></li>")
   ) |>
   dplyr::pull(pub_html)
 # Reverse ordered list

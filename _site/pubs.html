@@ -218,77 +218,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(authors_short, <span class="at">collapse =</span> <span class="st">", "</span>)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Read bib file</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>pubs <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(<span class="st">"assets/works.bib"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retain relevant fields and format author list</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">authors =</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(AUTHOR, format_authors),</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                   <span class="at">title =</span> TITLE,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                   <span class="at">journal =</span> JOURNAL,</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                   <span class="at">year =</span> YEAR) <span class="sc">|&gt;</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format in HTML. Markdown doesn't support reverse ordered lists??</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">pub_html =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"&lt;li&gt;{authors}. ({year}). {title}. &lt;em&gt;{journal}&lt;/em&gt;.&lt;/li&gt;"</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(pub_html)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse ordered list</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;ol reversed&gt;"</span>,</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  pubs,</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;/ol&gt;"</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Find path to PDF file</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>find_pdf <span class="ot">&lt;-</span> <span class="cf">function</span>(authors, year, title) {</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  lead_author <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(authors[<span class="dv">1</span>], <span class="st">"[^ ]+$"</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  title_short <span class="ot">&lt;-</span> title <span class="sc">|&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">"[^a-zA-Z </span><span class="sc">\\</span><span class="st">-]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">substr</span>(<span class="dv">1</span>, <span class="dv">30</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  pdf_pattern <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{lead_author}.*- {year} - {title_short}"</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"assets"</span>, <span class="st">"papers"</span>), </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">pattern =</span> pdf_pattern,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    (\(pdf) <span class="fu">file.path</span>(<span class="st">"assets"</span>, <span class="st">"papers"</span>, pdf))()</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Read bib file</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>pubs <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(<span class="st">"assets/works.bib"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retain relevant fields and format author list</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">authors =</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(AUTHOR, format_authors),</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> TITLE,</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">journal =</span> JOURNAL,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> YEAR,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">pdf =</span> purrr<span class="sc">::</span><span class="fu">pmap_chr</span>(<span class="fu">list</span>(AUTHOR, YEAR, TITLE), find_pdf)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format in HTML. Markdown doesn't support reverse ordered lists??</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">pub_html =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"&lt;li&gt;{authors}. ({year}). {title}. &lt;em&gt;{journal}&lt;/em&gt;. &lt;a href=</span><span class="sc">\"</span><span class="st">{pdf}</span><span class="sc">\"</span><span class="st"> target=</span><span class="sc">\"</span><span class="st">_blank</span><span class="sc">\"</span><span class="st">&gt;PDF&lt;/a&gt;&lt;/li&gt;"</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(pub_html)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse ordered list</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;ol reversed&gt;"</span>,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  pubs,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;/ol&gt;"</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <ol reversed="">
 <li>
-Kahane-Rapport, S.R., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Friedlaender, A.S., Calambokidis, J., …, Savoca, M.S.. (2022). Field measurements reveal the risk of microplastic ingestion by filter-feeding megafauna. <em>Nature Communications</em>.
+Kahane-Rapport, S.R., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Friedlaender, A.S., Calambokidis, J., …, Savoca, M.S.. (2022). Field measurements reveal exposure risk to microplastic ingestion by filter-feeding megafauna. <em>Nature Communications</em>. <a href="assets/papers/Kahane-Rapport et al. - 2022 - Field measurements reveal exposure risk to micropl.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Gough, W.T., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, Potvin, J., Fish, F.E., …, Goldbogen, J.A.. (2022). Fast and furious: energetic tradeoffs and scaling of high-speed foraging in rorqual whales. <em>Integrative Organismal Biology</em>.
+Gough, W.T., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, Potvin, J., Fish, F.E., …, Goldbogen, J.A.. (2022). Fast and furious: energetic tradeoffs and scaling of high-speed foraging in rorqual whales. <em>Integrative Organismal Biology</em>. <a href="assets/papers/Gough et al. - 2022 - Fast and Furious Energetic Tradeoffs and Scaling .pdf" target="_blank">PDF</a>
 </li>
 <li>
-Fahlbusch, J.A., <strong>Czapanskiy, M.F.</strong>, Calambokidis, J., Cade, D.E., Abrahms, B., Hazen, E.L., Goldbogen, J.A.. (2022). Blue whales increase feeding rates at fine-scale ocean features. <em>Proceedings of the Royal Society B</em>.
+Fahlbusch, J.A., <strong>Czapanskiy, M.F.</strong>, Calambokidis, J., Cade, D.E., Abrahms, B., Hazen, E.L., Goldbogen, J.A.. (2022). Blue whales increase feeding rates at fine-scale ocean features. <em>Proceedings of the Royal Society B</em>. <a href="assets/papers/Fahlbusch et al. - 2022 - Blue whales increase feeding rates at fine-scale o.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Nazario, E.C., Cade, D.E., Bierlich, K., <strong>Czapanskiy, M.F.</strong>, Goldbogen, J.A., …, Friedlaender, A.S.. (2022). Baleen whale inhalation variability revealed using animal-borne video tags. <em>PeerJ</em>.
+Nazario, E.C., Cade, D.E., Bierlich, K., <strong>Czapanskiy, M.F.</strong>, Goldbogen, J.A., …, Friedlaender, A.S.. (2022). Baleen whale inhalation variability revealed using animal-borne video tags. <em>PeerJ</em>. <a href="assets/papers/Nazario et al. - 2022 - Baleen whale inhalation variability revealed using.pdf" target="_blank">PDF</a>
 </li>
 <li>
-<strong>Czapanskiy, M.F.</strong>, Beltran, R.S.. (2022). How reproducibility will accelerate discovery through collaboration in physio-logging. <em>Frontiers in Physiology</em>.
+<strong>Czapanskiy, M.F.</strong>, Beltran, R.S.. (2022). How reproducibility will accelerate discovery through collaboration in physio-logging. <em>Frontiers in Physiology</em>. <a href="assets/papers/Czapanskiy and Beltran - 2022 - How Reproducibility Will Accelerate Discovery Thro.pdf" target="_blank">PDF</a>
 </li>
 <li>
-<strong>Czapanskiy, M.F.</strong>, Ponganis, P.J., Fahlbusch, J.A., Schmitt, T.L., Goldbogen, J.A.. (2022). An accelerometer-derived ballistocardiogram method for detecting heartrates in free-ranging marine mammals. <em>Journal of Exp. Bio.</em>.
+<strong>Czapanskiy, M.F.</strong>, Ponganis, P.J., Fahlbusch, J.A., Schmitt, T.L., Goldbogen, J.A.. (2022). An accelerometer-derived ballistocardiogram method for detecting heartrates in free-ranging marine mammals. <em>Journal of Exp. Bio.</em>. <a href="assets/papers/Czapanskiy et al. - 2022 - An accelerometer-derived ballistocardiogram method.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Beltran, R.S., Yuen, A.L., Condit, R., Robinson, P.W., <strong>Czapanskiy, M.F.</strong>, Crocker, D.E., Costa, D.P.. (2022). Elephant seals time their long-distance migrations using a map sense. <em>Current Biology</em>.
+Beltran, R.S., Yuen, A.L., Condit, R., Robinson, P.W., <strong>Czapanskiy, M.F.</strong>, Crocker, D.E., Costa, D.P.. (2022). Elephant seals time their long-distance migrations using a map sense. <em>Current Biology</em>. <a href="assets/papers/Beltran et al. - 2022 - Elephant seals time their long-distance migrations.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Segre, P.S., Gough, W.T., Roualdes, E.A., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, …, Goldbogen, J.A.. (2022). Scaling of maneuvering performance in baleen whales: larger whales outperform expectations. <em>Journal of Exp. Bio.</em>.
+Segre, P.S., Gough, W.T., Roualdes, E.A., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, …, Goldbogen, J.A.. (2022). Scaling of maneuvering performance in baleen whales: larger whales outperform expectations. <em>Journal of Exp. Bio.</em>. <a href="assets/papers/Segre et al. - 2022 - Scaling of maneuvering performance in baleen whale.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Cade, D.E., Gough, W.T., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Kahane-Rapport, S.R., …, Goldbogen, J.A.. (2021). Tools for integrating inertial sensor data with video bio-loggers, including estimation of animal orientation, motion, and position. <em>Animal Biotelemetry</em>.
+Cade, D.E., Gough, W.T., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Kahane-Rapport, S.R., …, Goldbogen, J.A.. (2021). Tools for integrating inertial sensor data with video bio-loggers, including estimation of animal orientation, motion, and position. <em>Animal Biotelemetry</em>. <a href="assets/papers/Cade et al. - 2021 - Tools for integrating inertial sensor data with vi.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Kahane-Rapport, S.R., Gough, W.T., Fahlbusch, J.A., …, Goldbogen, J.A.. (2021). Baleen whale prey consumption based on high-resolution foraging measurements. <em>Nature</em>.
+Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Kahane-Rapport, S.R., Gough, W.T., Fahlbusch, J.A., …, Goldbogen, J.A.. (2021). Baleen whale prey consumption based on high-resolution foraging measurements. <em>Nature</em>. <a href="assets/papers/Savoca et al. - 2021 - Baleen whale prey consumption based on high-resolu.pdf" target="_blank">PDF</a>
 </li>
 <li>
-<strong>Czapanskiy, M.F.</strong>, Savoca, M.S., Gough, W.T., Segre, P.S., Wisniewska, D.M., Cade, D.E., Goldbogen, J.A.. (2021). Modelling short-term energetic costs of sonar disturbance to cetaceans using high-resolution foraging data. <em>Journal of Applied Ecology</em>.
+<strong>Czapanskiy, M.F.</strong>, Savoca, M.S., Gough, W.T., Segre, P.S., Wisniewska, D.M., Cade, D.E., Goldbogen, J.A.. (2021). Modelling short-term energetic costs of sonar disturbance to cetaceans using high-resolution foraging data. <em>Journal of Applied Ecology</em>. <a href="assets/papers/Czapanskiy et al. - 2021 - Modelling short-term energetic costs of sonar dist.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Gough, W.T., Smith, H.J., Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Fish, F.E., …, Goldbogen, J.A.. (2021). Scaling of oscillatory kinematics and Froude efficiency in baleen whales. <em>Journal of Exp. Bio.</em>.
+Gough, W.T., Smith, H.J., Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Fish, F.E., …, Goldbogen, J.A.. (2021). Scaling of oscillatory kinematics and Froude efficiency in baleen whales. <em>Journal of Exp. Bio.</em>. <a href="assets/papers/Gough et al. - 2021 - Scaling of oscillatory kinematics and Froude effic.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Williams, C.L., <strong>Czapanskiy, M.F.</strong>, John, J.S., Leger, J.S., Scadeng, M., Ponganis, P.J.. (2021). Cervical air sac oxygen profiles in diving emperor penguins: parabronchial ventilation and the respiratory oxygen store. <em>Journal of Exp. Bio.</em>.
+Williams, C.L., <strong>Czapanskiy, M.F.</strong>, John, J.S., Leger, J.S., Scadeng, M., Ponganis, P.J.. (2021). Cervical air sac oxygen profiles in diving emperor penguins: parabronchial ventilation and the respiratory oxygen store. <em>Journal of Exp. Bio.</em>. <a href="assets/papers/Williams et al. - 2021 - Cervical air sac oxygen profiles in diving emperor.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Goldbogen, J.A., Cade, D.E., Wisniewska, D.M., Potvin, J., Segre, P.S., …, Pyenson, N.D.. (2019). Why whales are big but not bigger: Physiological drivers and ecological limits in the age of ocean giants. <em>Science</em>.
+Goldbogen, J.A., Cade, D.E., Wisniewska, D.M., Potvin, J., Segre, P.S., …, Pyenson, N.D.. (2019). Why whales are big but not bigger: Physiological drivers and ecological limits in the age of ocean giants. <em>Science</em>. <a href="assets/papers/Goldbogen et al. - 2019 - Why whales are big but not bigger Physiological d.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Goldbogen, J.A., Cade, D.E., Calambokidis, J., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J., …, Ponganis, P.J.. (2019). Extreme bradycardia and tachycardia in the world’s largest animal. <em>PNAS</em>.
+Goldbogen, J.A., Cade, D.E., Calambokidis, J., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J., …, Ponganis, P.J.. (2019). Extreme bradycardia and tachycardia in the world’s largest animal. <em>PNAS</em>. <a href="assets/papers/Goldbogen et al. - 2019 - Extreme bradycardia and tachycardia in the world’s.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Adams, J., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Carle, R., Hodum, P.. (2019). Diving behavior of Pink-footed Shearwaters rearing chicks on Isla Mocha, Chile. <em>Marine Ornithology</em>.
+Adams, J., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Carle, R., Hodum, P.. (2019). Diving behavior of Pink-footed Shearwaters rearing chicks on Isla Mocha, Chile. <em>Marine Ornithology</em>. <a href="assets/papers/Adams et al. - 2019 - Diving behavior of Pink-footed Shearwaters Ardenna.pdf" target="_blank">PDF</a>
 </li>
 <li>
-Kelsey, E.C., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Pereksta, D.M., Adams, J.. (2018). Collision and displacement vulnerability to offshore wind energy infrastructure among marine birds of the Pacific Outer Continental Shelf. <em>Journal of Env. Mgmt.</em>.
+Kelsey, E.C., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Pereksta, D.M., Adams, J.. (2018). Collision and displacement vulnerability to offshore wind energy infrastructure among marine birds of the Pacific Outer Continental Shelf. <em>Journal of Env. Mgmt.</em>. <a href="assets/papers/Kelsey et al. - 2018 - Collision and displacement vulnerability to offsho.pdf" target="_blank">PDF</a>
 </li>
 </ol>
 
