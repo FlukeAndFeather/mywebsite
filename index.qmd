@@ -11,7 +11,7 @@ format:
 :::
 
 ::: {.g-col-4}
-![Fig 1: Scientist wearing a beanie](headshot.jpg)
+![Fig 1: Scientist wearing a beanie](img/headshot.jpg)
 :::
 
 ::: {.g-col-6}

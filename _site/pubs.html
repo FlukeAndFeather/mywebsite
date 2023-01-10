@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -51,6 +114,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="custom">
 </head>
 
 <body class="nav-fixed">
@@ -70,10 +134,6 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./about.html">
  <span class="menu-text">About</span></a>
   </li>  
@@ -86,8 +146,8 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./talks.html">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link active" href="./pubs.html" aria-current="page">
+ <span class="menu-text">Publications</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -121,6 +181,116 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>This publications list is generated programmatically from .bib files. Expand the folded code to see how!</p>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Format a publication's author list</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>format_authors <span class="ot">&lt;-</span> <span class="cf">function</span>(authors) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Split authors' names (First MI Last or First Last)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  authors_split <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(authors, <span class="st">" "</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format as Last, FI. or Last, FI.MI.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  authors_formatted <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    authors_split,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(parts) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">length</span>(parts) <span class="sc">==</span> <span class="dv">3</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">"%s, %s.%s."</span>, </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                parts[<span class="dv">3</span>], </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">substr</span>(parts[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">1</span>), </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">substr</span>(parts[<span class="dv">2</span>], <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">"%s, %s."</span>, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                parts[<span class="dv">2</span>], </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="fu">substr</span>(parts[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shorten long author lists</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(authors_formatted) <span class="sc">&gt;</span> <span class="dv">7</span>) {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    authors_short <span class="ot">&lt;-</span> <span class="fu">c</span>(authors_formatted[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"..."</span>, </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                       authors_formatted[<span class="fu">length</span>(authors_formatted)])</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    authors_short <span class="ot">&lt;-</span> authors_formatted</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make my name bold</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  authors_short[authors_short <span class="sc">==</span> <span class="st">"Czapanskiy, M.F."</span>] <span class="ot">&lt;-</span> <span class="st">"&lt;strong&gt;Czapanskiy, M.F.&lt;/strong&gt;"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Concatenate</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(authors_short, <span class="at">collapse =</span> <span class="st">", "</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Read bib file</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>pubs <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(<span class="st">"assets/works.bib"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retain relevant fields and format author list</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">authors =</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(AUTHOR, format_authors),</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                   <span class="at">title =</span> TITLE,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                   <span class="at">journal =</span> JOURNAL,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                   <span class="at">year =</span> YEAR) <span class="sc">|&gt;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format in HTML. Markdown doesn't support reverse ordered lists??</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">pub_html =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"&lt;li&gt;{authors}. ({year}). {title}. &lt;em&gt;{journal}&lt;/em&gt;.&lt;/li&gt;"</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(pub_html)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse ordered list</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;ol reversed&gt;"</span>,</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  pubs,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&lt;/ol&gt;"</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<ol reversed="">
+<li>
+Kahane-Rapport, S.R., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Friedlaender, A.S., Calambokidis, J., …, Savoca, M.S.. (2022). Field measurements reveal the risk of microplastic ingestion by filter-feeding megafauna. <em>Nature Communications</em>.
+</li>
+<li>
+Gough, W.T., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, Potvin, J., Fish, F.E., …, Goldbogen, J.A.. (2022). Fast and furious: energetic tradeoffs and scaling of high-speed foraging in rorqual whales. <em>Integrative Organismal Biology</em>.
+</li>
+<li>
+Fahlbusch, J.A., <strong>Czapanskiy, M.F.</strong>, Calambokidis, J., Cade, D.E., Abrahms, B., Hazen, E.L., Goldbogen, J.A.. (2022). Blue whales increase feeding rates at fine-scale ocean features. <em>Proceedings of the Royal Society B</em>.
+</li>
+<li>
+Nazario, E.C., Cade, D.E., Bierlich, K., <strong>Czapanskiy, M.F.</strong>, Goldbogen, J.A., …, Friedlaender, A.S.. (2022). Baleen whale inhalation variability revealed using animal-borne video tags. <em>PeerJ</em>.
+</li>
+<li>
+<strong>Czapanskiy, M.F.</strong>, Beltran, R.S.. (2022). How reproducibility will accelerate discovery through collaboration in physio-logging. <em>Frontiers in Physiology</em>.
+</li>
+<li>
+<strong>Czapanskiy, M.F.</strong>, Ponganis, P.J., Fahlbusch, J.A., Schmitt, T.L., Goldbogen, J.A.. (2022). An accelerometer-derived ballistocardiogram method for detecting heartrates in free-ranging marine mammals. <em>Journal of Exp. Bio.</em>.
+</li>
+<li>
+Beltran, R.S., Yuen, A.L., Condit, R., Robinson, P.W., <strong>Czapanskiy, M.F.</strong>, Crocker, D.E., Costa, D.P.. (2022). Elephant seals time their long-distance migrations using a map sense. <em>Current Biology</em>.
+</li>
+<li>
+Segre, P.S., Gough, W.T., Roualdes, E.A., Cade, D.E., <strong>Czapanskiy, M.F.</strong>, …, Goldbogen, J.A.. (2022). Scaling of maneuvering performance in baleen whales: larger whales outperform expectations. <em>Journal of Exp. Bio.</em>.
+</li>
+<li>
+Cade, D.E., Gough, W.T., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J.A., Kahane-Rapport, S.R., …, Goldbogen, J.A.. (2021). Tools for integrating inertial sensor data with video bio-loggers, including estimation of animal orientation, motion, and position. <em>Animal Biotelemetry</em>.
+</li>
+<li>
+Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Kahane-Rapport, S.R., Gough, W.T., Fahlbusch, J.A., …, Goldbogen, J.A.. (2021). Baleen whale prey consumption based on high-resolution foraging measurements. <em>Nature</em>.
+</li>
+<li>
+<strong>Czapanskiy, M.F.</strong>, Savoca, M.S., Gough, W.T., Segre, P.S., Wisniewska, D.M., Cade, D.E., Goldbogen, J.A.. (2021). Modelling short-term energetic costs of sonar disturbance to cetaceans using high-resolution foraging data. <em>Journal of Applied Ecology</em>.
+</li>
+<li>
+Gough, W.T., Smith, H.J., Savoca, M.S., <strong>Czapanskiy, M.F.</strong>, Fish, F.E., …, Goldbogen, J.A.. (2021). Scaling of oscillatory kinematics and Froude efficiency in baleen whales. <em>Journal of Exp. Bio.</em>.
+</li>
+<li>
+Williams, C.L., <strong>Czapanskiy, M.F.</strong>, John, J.S., Leger, J.S., Scadeng, M., Ponganis, P.J.. (2021). Cervical air sac oxygen profiles in diving emperor penguins: parabronchial ventilation and the respiratory oxygen store. <em>Journal of Exp. Bio.</em>.
+</li>
+<li>
+Goldbogen, J.A., Cade, D.E., Wisniewska, D.M., Potvin, J., Segre, P.S., …, Pyenson, N.D.. (2019). Why whales are big but not bigger: Physiological drivers and ecological limits in the age of ocean giants. <em>Science</em>.
+</li>
+<li>
+Goldbogen, J.A., Cade, D.E., Calambokidis, J., <strong>Czapanskiy, M.F.</strong>, Fahlbusch, J., …, Ponganis, P.J.. (2019). Extreme bradycardia and tachycardia in the world’s largest animal. <em>PNAS</em>.
+</li>
+<li>
+Adams, J., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Carle, R., Hodum, P.. (2019). Diving behavior of Pink-footed Shearwaters rearing chicks on Isla Mocha, Chile. <em>Marine Ornithology</em>.
+</li>
+<li>
+Kelsey, E.C., Felis, J.J., <strong>Czapanskiy, M.F.</strong>, Pereksta, D.M., Adams, J.. (2018). Collision and displacement vulnerability to offshore wind energy infrastructure among marine birds of the Pacific Outer Continental Shelf. <em>Journal of Env. Mgmt.</em>.
+</li>
+</ol>
 
 
 

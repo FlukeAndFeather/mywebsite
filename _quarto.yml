@@ -5,13 +5,12 @@ website:
   title: "Max Czapanskiy | Ecology and Data Science"
   navbar:
     right:
-      - href: index.qmd
-        text: Home
       - href: about.qmd
         text: About
       - teaching.qmd
       - research.qmd
-      - talks.qmd
+      - href: pubs.qmd
+        text: Publications
   search: false
 
 format:

@@ -2,7 +2,7 @@
 title: "Max Czapanskiy"
 about:
   template: trestles
-  image: profile.jpg
+  image: img/profile.jpg
   links: 
     - icon: github
       href: https://github.com/FlukeAndFeather
