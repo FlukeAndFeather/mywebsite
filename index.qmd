@@ -21,7 +21,11 @@ format:
 
 Postdoctoral scholar with NOAA's Southwest Fisheries Science Center and UC Santa Cruz's Ocean Sciences Department working at the intersection of ecology and software engineering. I develop educational resources and computational tools that promote open science.
 
-[<i class="bi bi-github"></i>](https://github.com/FlukeAndFeather) [{{< ai google-scholar >}}](https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en) [{{< ai orcid >}}](https://orcid.org/0000-0002-6302-905X)
+[<i class="bi bi-envelope"></i>](mailto:maxczapanskiy@gmail.com) 
+[<i class="bi bi-github"></i>](https://github.com/FlukeAndFeather) 
+[{{< ai google-scholar >}}](https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en) 
+[{{< ai orcid >}}](https://orcid.org/0000-0002-6302-905X)
+[{{< ai cv >}}](assets/Czapanskiy_CV_2023-01-11.pdf)
 :::
 
 ::: {.g-col-1}

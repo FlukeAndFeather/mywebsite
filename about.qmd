@@ -4,12 +4,16 @@ about:
   template: trestles
   image: img/profile.jpg
   links: 
+    - icon: envelope
+      href: mailto:maxczapanskiy@gmail.com
     - icon: github
       href: https://github.com/FlukeAndFeather
     - text: "{{< ai google-scholar >}}"
       href: https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en
     - text: "{{< ai orcid >}}"
       href: https://orcid.org/0000-0002-6302-905X
+    - text: "{{< ai cv >}}"
+      href: assets/Czapanskiy_CV_2023-01-11.pdf
 ---
 
 My work advances ecological data science at multiple scales. I teach scientists how to use software engineering principles to make the most of their data, I develop tools for visualizing and analyzing big data, and I advocate for open science practices and policies.
