@@ -6,7 +6,7 @@ title: "Teaching"
 
 I developed and taught *jese4sci* to address both scientific and pedagogical challenges. The *jese4sci* curriculum contained the essential software engineering skills that facilitate open science, like version control and documentation (see course map below). Because most students come in with different experience levels and goals, I designed the course to be self-directed and mastery-oriented, which allowed students to move at the pace and focus on the material best suited to their growth. Here's [an example lesson and assignment](https://github.com/FlukeAndFeather/jese4sci-VAL/blob/master/VAL102.md) from the validation track on GitHub.
 
-![*jese4sci* course map](img/coursemap.jpg){width="600"}
+![Fig 2: *jese4sci* course map](img/coursemap.jpg){width="600"}
 
 ## The Carpentries
 

@@ -4,7 +4,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "I developed and taught jese4sci to address both scientific and pedagogical challenges. The jese4sci curriculum contained the essential software engineering skills that facilitate open science, like version control and documentation (see course map below). Because most students come in with different experience levels and goals, I designed the course to be self-directed and mastery-oriented, which allowed students to move at the pace and focus on the material best suited to their growth. Here’s an example lesson and assignment from the validation track on GitHub.\n\n\n\njese4sci course map"
+    "text": "I developed and taught jese4sci to address both scientific and pedagogical challenges. The jese4sci curriculum contained the essential software engineering skills that facilitate open science, like version control and documentation (see course map below). Because most students come in with different experience levels and goals, I designed the course to be self-directed and mastery-oriented, which allowed students to move at the pace and focus on the material best suited to their growth. Here’s an example lesson and assignment from the validation track on GitHub.\n\n\n\nFig 2: jese4sci course map"
   },
   {
     "objectID": "teaching.html#the-carpentries",
@@ -19,6 +19,34 @@
     "title": "Teaching",
     "section": "Research Mentorship",
     "text": "Research Mentorship\nI’m passionate about sharing my data skills with other scientists to help them develop their own abilities and make their research more impactful. I’ve mentored scientists at all career stages, from undergraduate and graduate students to post-docs and faculty. These efforts supported publications in The Journal of Experimental Biology, Nature Communications, and Current Biology. If you’d like to develop your data science skills and have a research project that you want to be more open and reproducible, please contact me!"
+  },
+  {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Animal-borne sensors, like GPS and accelerometers, allow remote observation of animal behavior and physiology. As these devices (bio-loggers) accumulate more and more sensors sampling at ever higher frequencies, the deluge of data becomes impossible to interpret with traditional tools. In my research, I develop new methods and software for the analysis and visualization of bio-logging data, with an emphasis on open and reproducible science practices. This page highlights my recent research and future directions."
+  },
+  {
+    "objectID": "research.html#physiology",
+    "href": "research.html#physiology",
+    "title": "Research",
+    "section": "Physiology",
+    "text": "Physiology\n\n\n\n\n\n\nFig 3: A ballistocardiogram detects heart beats in motion data\n\n\n\n\nThe rumbling of a whale’s heart beat produces a physical waveform (a ballistocardiogram, or BCG), analogous to the more widely known electrocardiogram. I developed a method for extracting the BCG from standard bio-logging sensors (Czapanskiy et al. 2022), advancing our ability to monitor the physiological responses of endangered species to disturbances. I published the BCG method as a research compendium, meaning the data, code, and manuscript are all linked together in an R package available on GitHub."
+  },
+  {
+    "objectID": "research.html#behavior",
+    "href": "research.html#behavior",
+    "title": "Research",
+    "section": "Behavior",
+    "text": "Behavior\n\n\n\n\n\n\nFig 4: Interactive inspection of Stickleback behavioral predictions\n\n\n\n\nWe can now observe extremely fine-scale behaviors with new high-resolution, multi-sensor bio-logging devices. Animal behavior scientists use accelerometers, microphones, and other sensors to identify individual behavioral events such as feeding and social interactions. Manually annotating behaviors in bio-logging data is a critical bottleneck and we lack computational tools for automating the process. I developed a machine learning pipeline, Stickleback, that uses time series classification algorithms to train a behavior detection model. Available in R and Python, currently in review at the Journal of Open Source Software."
+  },
+  {
+    "objectID": "research.html#cyberinfrastructure",
+    "href": "research.html#cyberinfrastructure",
+    "title": "Research",
+    "section": "Cyberinfrastructure",
+    "text": "Cyberinfrastructure\nLike many new types of data, bio-logging lacks common tools and data standards (i.e., cyberinfrastructure). In the absence of these norms, scientists struggle to share and re-use data and code. I analyzed these challenges in bio-logging and described a future cyberinfrastructure solution based on successful efforts in other fields (Czapanskiy and Beltran 2022). My current research includes developing these tools and standards for bio-logging data, as well as educational resources to help bio-logging scientists make their science open and reproducible."
   },
   {
     "objectID": "about.html",

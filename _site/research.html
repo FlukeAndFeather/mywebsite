@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -95,7 +114,16 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#physiology" id="toc-physiology" class="nav-link active" data-scroll-target="#physiology">Physiology</a></li>
+  <li><a href="#behavior" id="toc-behavior" class="nav-link" data-scroll-target="#behavior">Behavior</a></li>
+  <li><a href="#cyberinfrastructure" id="toc-cyberinfrastructure" class="nav-link" data-scroll-target="#cyberinfrastructure">Cyberinfrastructure</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -117,10 +145,62 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Animal-borne sensors, like GPS and accelerometers, allow remote observation of animal behavior and physiology. As these devices (bio-loggers) accumulate more and more sensors sampling at ever higher frequencies, the deluge of data becomes impossible to interpret with traditional tools. In my research, I develop new methods and software for the analysis and visualization of bio-logging data, with an emphasis on open and reproducible science practices. This page highlights my recent research and future directions.</p>
+<section id="physiology" class="level2">
+<h2 class="anchored" data-anchor-id="physiology">Physiology</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/ballistocardiogram.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fig 3: A ballistocardiogram detects heart beats in motion data</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p>The rumbling of a whale’s heart beat produces a physical waveform (a ballistocardiogram, or BCG), analogous to the more widely known electrocardiogram. I developed a method for extracting the BCG from standard bio-logging sensors <span class="citation" data-cites="Czapanskiy_2022a">(<a href="#ref-Czapanskiy_2022a" role="doc-biblioref">Czapanskiy et al. 2022</a>)</span>, advancing our ability to monitor the physiological responses of endangered species to disturbances. I published the BCG method as a research compendium, meaning the data, code, and manuscript are all linked together in an R package available on <a href="https://github.com/FlukeAndFeather/cetaceanbcg">GitHub</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="behavior" class="level2">
+<h2 class="anchored" data-anchor-id="behavior">Behavior</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/plot-predictions.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fig 4: Interactive inspection of Stickleback behavioral predictions</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p>We can now observe extremely fine-scale behaviors with new high-resolution, multi-sensor bio-logging devices. Animal behavior scientists use accelerometers, microphones, and other sensors to identify individual behavioral events such as feeding and social interactions. Manually annotating behaviors in bio-logging data is a critical bottleneck and we lack computational tools for automating the process. I developed a machine learning pipeline, <a href="https://flukeandfeather.github.io/rstickleback">Stickleback</a>, that uses time series classification algorithms to train a behavior detection model. Available in R and Python, currently in review at the <em>Journal of Open Source Software</em>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="cyberinfrastructure" class="level2">
+<h2 class="anchored" data-anchor-id="cyberinfrastructure">Cyberinfrastructure</h2>
+<p>Like many new types of data, bio-logging lacks common tools and data standards (i.e., cyberinfrastructure). In the absence of these norms, scientists struggle to share and re-use data and code. I analyzed these challenges in bio-logging and described a future cyberinfrastructure solution based on successful efforts in other fields <span class="citation" data-cites="Czapanskiy_2022b">(<a href="#ref-Czapanskiy_2022b" role="doc-biblioref">Czapanskiy and Beltran 2022</a>)</span>. My current research includes developing these tools and standards for bio-logging data, as well as educational resources to help bio-logging scientists make their science open and reproducible.</p>
+</section>
+<section id="references" class="level2">
 
 
 
-</main> <!-- /main -->
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Czapanskiy_2022b" class="csl-entry" role="doc-biblioentry">
+Czapanskiy, Max F., and Roxanne S. Beltran. 2022. <span>“How Reproducibility Will Accelerate Discovery Through Collaboration in Physio-Logging.”</span> <em>Frontiers in Physiology</em>.
+</div>
+<div id="ref-Czapanskiy_2022a" class="csl-entry" role="doc-biblioentry">
+Czapanskiy, Max F., Paul J. Ponganis, James A. Fahlbusch, Todd L. Schmitt, and Jeremy A. Goldbogen. 2022. <span>“An Accelerometer-Derived Ballistocardiogram Method for Detecting Heartrates in Free-Ranging Marine Mammals.”</span> <em>Journal of Exp. Bio.</em>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
