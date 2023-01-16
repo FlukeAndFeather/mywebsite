@@ -25,7 +25,7 @@ Postdoctoral scholar with NOAA's Southwest Fisheries Science Center and UC Santa
 [<i class="bi bi-github"></i>](https://github.com/FlukeAndFeather) 
 [{{< ai google-scholar >}}](https://scholar.google.com/citations?user=YgvDDvMAAAAJ&hl=en) 
 [{{< ai orcid >}}](https://orcid.org/0000-0002-6302-905X)
-[{{< ai cv >}}](assets/Czapanskiy_CV_2023-01-11.pdf)
+[{{< ai cv >}}](assets/Czapanskiy_CV.pdf)
 :::
 
 ::: {.g-col-1}
