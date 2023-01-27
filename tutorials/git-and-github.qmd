@@ -74,11 +74,11 @@ You now have a local copy of your repository that you can use for data analysis.
 
 ### Recap
 
-Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you'll learn how to update your repository.
+Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you'll learn how to update your repository. But first, call an instructor over and show them your progress.
 
 ## Using Git
 
-**TL;DR**: You'll use commit and push for like 85% of your version control needs.
+**TL;DR**: You'll use `commit` and `push` for 85% of your version control needs.
 
 ### Make some changes
 
@@ -132,6 +132,14 @@ Head back over to GitHub in your browser. Refresh the page with your repository.
 
 Your local repository (on your machine) and your remote repository (on GitHub) are now in sync. This serves as valuable back up and makes sharing easy!
 
+### Recap
+
+-   `commit` creates a local check point of your recently created, modified, and deleted files.
+
+-   `push` syncs your local commits to your remote repository on GitHub.
+
+-   Call an instructor over so they can see your repo on GitHub.
+
 ## Blowing it up and starting over
 
 At some point you'll need to create another local copy of your repository (`clone` it from GitHub). Maybe you're working on another computer, or you're sharing your code with a collaborator, or Git did something weird and you need to blow it up and start over. Version control takes a very scary thing (re-creating your work from the ground up) and makes it easy.
@@ -139,7 +147,7 @@ At some point you'll need to create another local copy of your repository (`clon
 1.  Blow it all up. By which I mean, delete your local files. First, close RStudio. Then delete the directory holding your project/repo. If it was in \~/Documents/GitHub/myrepo/, then delete the myrepo/ directory.
 2.  `clone` it anew. Open RStudio. Create a new repository from version control as you did before.
 
-See! It's all there! We love it.
+This is one of the most valuable features of using version control. You can confidently make changes, experiment, and tinker secure in the knowledge you can always return to an earlier version.
 
 ## Sharing your work with GitHub Pages
 
@@ -174,6 +182,14 @@ This involves changing a setting on the GitHub website.
 4.  Switch from the Settings tab to Actions. You'll see jobs listed including "build" and "deploy". When they're complete (green checkmarks), navigate to \[your_username\].github.io/myrepo.
 
 This is a pretty trivial example, but it's hopefully enough to get you started. For a fully featured example, check out [Blue Whales and Lagrangian Features](https://physalus.github.io/Blue-Whales-and-Lagrangian-Features). My colleague, James Fahlbusch, used GitHub Pages to share an R Markdown report containing the analyses and results for the first chapter of his dissertation with his co-authors and advisor. The R Markdown document eventually became the Supplemental Material for his manuscript published in [Proceedings B](https://doi.org/10.1098/rspb.2022.1180). This is a great way to facilitate collaborations and can even make the publishing process easier!
+
+### Recap
+
+-   GitHub has a built-in features to help your projects have a web presence
+
+-   Pages let you share your repo as a website
+
+-   Combining Pages with *literate programming* (Quarto or R Markdown) is a great way to use GitHub for collaboration.
 
 ## Lesson recap
 

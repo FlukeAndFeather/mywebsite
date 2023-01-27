@@ -197,12 +197,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="recap" class="level3">
 <h3 class="anchored" data-anchor-id="recap">Recap</h3>
-<p>Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you’ll learn how to update your repository.</p>
+<p>Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you’ll learn how to update your repository. But first, call an instructor over and show them your progress.</p>
 </section>
 </section>
 <section id="using-git" class="level2">
 <h2 class="anchored" data-anchor-id="using-git">Using Git</h2>
-<p><strong>TL;DR</strong>: You’ll use commit and push for like 85% of your version control needs.</p>
+<p><strong>TL;DR</strong>: You’ll use <code>commit</code> and <code>push</code> for 85% of your version control needs.</p>
 <section id="make-some-changes" class="level3">
 <h3 class="anchored" data-anchor-id="make-some-changes">Make some changes</h3>
 <p>Git tracks your changes. So let’s make some changes for Git to track.</p>
@@ -249,6 +249,14 @@ plot(x, y, type = "l")
 <p><img src="images/image-239767023.png" class="img-fluid" width="600"></p>
 <p>Your local repository (on your machine) and your remote repository (on GitHub) are now in sync. This serves as valuable back up and makes sharing easy!</p>
 </section>
+<section id="recap-1" class="level3">
+<h3 class="anchored" data-anchor-id="recap-1">Recap</h3>
+<ul>
+<li><p><code>commit</code> creates a local check point of your recently created, modified, and deleted files.</p></li>
+<li><p><code>push</code> syncs your local commits to your remote repository on GitHub.</p></li>
+<li><p>Call an instructor over so they can see your repo on GitHub.</p></li>
+</ul>
+</section>
 </section>
 <section id="blowing-it-up-and-starting-over" class="level2">
 <h2 class="anchored" data-anchor-id="blowing-it-up-and-starting-over">Blowing it up and starting over</h2>
@@ -257,7 +265,7 @@ plot(x, y, type = "l")
 <li>Blow it all up. By which I mean, delete your local files. First, close RStudio. Then delete the directory holding your project/repo. If it was in ~/Documents/GitHub/myrepo/, then delete the myrepo/ directory.</li>
 <li><code>clone</code> it anew. Open RStudio. Create a new repository from version control as you did before.</li>
 </ol>
-<p>See! It’s all there! We love it.</p>
+<p>This is one of the most valuable features of using version control. You can confidently make changes, experiment, and tinker secure in the knowledge you can always return to an earlier version.</p>
 </section>
 <section id="sharing-your-work-with-github-pages" class="level2">
 <h2 class="anchored" data-anchor-id="sharing-your-work-with-github-pages">Sharing your work with GitHub Pages</h2>
@@ -292,6 +300,14 @@ plot(x, y, type = "l")
 <li>Switch from the Settings tab to Actions. You’ll see jobs listed including “build” and “deploy”. When they’re complete (green checkmarks), navigate to [your_username].github.io/myrepo.</li>
 </ol>
 <p>This is a pretty trivial example, but it’s hopefully enough to get you started. For a fully featured example, check out <a href="https://physalus.github.io/Blue-Whales-and-Lagrangian-Features">Blue Whales and Lagrangian Features</a>. My colleague, James Fahlbusch, used GitHub Pages to share an R Markdown report containing the analyses and results for the first chapter of his dissertation with his co-authors and advisor. The R Markdown document eventually became the Supplemental Material for his manuscript published in <a href="https://doi.org/10.1098/rspb.2022.1180">Proceedings B</a>. This is a great way to facilitate collaborations and can even make the publishing process easier!</p>
+</section>
+<section id="recap-2" class="level3">
+<h3 class="anchored" data-anchor-id="recap-2">Recap</h3>
+<ul>
+<li><p>GitHub has a built-in features to help your projects have a web presence</p></li>
+<li><p>Pages let you share your repo as a website</p></li>
+<li><p>Combining Pages with <em>literate programming</em> (Quarto or R Markdown) is a great way to use GitHub for collaboration.</p></li>
+</ul>
 </section>
 </section>
 <section id="lesson-recap" class="level2">
