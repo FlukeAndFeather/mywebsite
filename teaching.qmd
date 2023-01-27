@@ -15,3 +15,11 @@ I'm a certified Carpentries instructor since 2019. I've taught Software and Data
 ## Research Mentorship
 
 I'm passionate about sharing my data skills with other scientists to help them develop their own abilities and make their research more impactful. I've mentored scientists at all career stages, from undergraduate and graduate students to post-docs and faculty. These efforts supported publications in [*The Journal of Experimental Biology*](https://doi.org/10.1242/jeb.237586), [*Nature Communications*](https://doi.org/10.1038/s41467-022-33334-5), and [*Current Biology*](https://doi.org/10.1016/j.cub.2022.01.031). If you'd like to develop your data science skills and have a research project that you want to be more open and reproducible, please contact me!
+
+## Tutorials
+
+I make tutorials for R and data science workshops. You're welcome to repurpose these for your teaching. 
+
+### Git and GitHub
+
+[SCRUBs Lesson for Friday January 27, 2023](tutorials/git-and-github.qmd)

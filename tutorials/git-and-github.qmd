@@ -1,0 +1,192 @@
+---
+title: "Git and GitHub"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+---
+
+**SCRUBs Lesson Friday January 27, 2023**
+
+## Pre-lesson recap
+
+Before today's lesson, you should have:
+
+-   Familiarized yourself with the basics of Git and GitHub by reading [Bryan 2018](https://doi.org/10.1080/00031305.2017.1399928) (PDF on SCRUBs Drive)
+
+-   Installed Git
+
+-   Connected RStudio to GitHub
+
+## Today's agenda
+
+The goal for today's lesson is to get you *just enough* information to begin incorporating version control into your workflow. In order, we'll cover:
+
+1.  RStudio projects
+2.  Using Git
+3.  Blowing it up and starting over
+4.  Bonus: sharing your work with GitHub Pages
+
+## RStudio projects
+
+You don't *have to* use a project to use version control, but it sure does make it a lot easier. For more info about projects, see the [R for Data Science chapter](https://r4ds.had.co.nz/workflow-projects.html). Now let's create an example RStudio project and connect it to GitHub. The preferred method for this is "New project, GitHub first". See [Happy Git with R](https://happygitwithr.com/new-github-first.html) for other options, but I suggest sticking with this one.
+
+### Create a GitHub repo
+
+1.  Go to [github.com](https://github.com)
+2.  Click the green "New" button to create a new repository
+3.  Call it "myrepo" and click the green "Create repository" button\
+    ![](images/image-1927055850.png){width="600"}
+4.  Copy your repository link. It should be: https://github.com/\[username\]/myrepo.git.\
+    ![](images/image-1845780386.png){width="600"}
+
+### Create an RStudio project with your repo
+
+Congratulations - you've created a Git repository! But right now it only lives on GitHub's server. Let's bring it down to your computer (`clone` your repo, in Git lingo).
+
+1.  Open RStudio
+2.  File \> New Project \> Version Control\
+    ![](images/image-658292087.png){width="417"}
+3.  Choose Git for your version control then paste your repository link.
+
+You now have a local copy of your repository that you can use for data analysis. A few things you should see in RStudio now:
+
+![](images/image-997594596.png){width="600"}
+
+-   The Git pane is where you'll make Git do things. This is RStudio's way of helping us avoid the command line and we're very grateful for that.
+
+-   Your project name should now be visible in the top-right corner. Among other things, this means you'll never have to call `setwd()` ever again. All R commands will execute relative to your project's directory. You have no idea the number of problems this will help you avoid. Git aside, it's reason enough to use projects.
+
+-   You've got some new files.
+
+    -   A directory called ".git". NEVER TOUCH THIS. Forget it exists. Seriously.
+
+    -   A text file called .gitignore. This is how you tell Git to ignore certain files, like sensitive data or very large files that are too big for GitHub.
+
+    -   A project file called myrepo.Rproj. This is how RStudio knows you have a project. It'll just hang out and make your life easier, you don't have to do anything with it.
+
+### Project do's and don'ts (don't's?)
+
+-   **No nesting**. Never put a project inside of another one. You want a flat hierarchy. Think Kansas: flatter than a pancake.
+
+-   **Cloud storage *can* cause headaches**. If you use Drive, Box, or another service for syncing files you should probably put your projects somewhere else, like a local or external hard drive. Cloud sync software creates hidden files and modifies existing files in unpredictable ways that can make projects and version control puke all over themselves at random intervals. That said, if it's your only choice, go for it. Then send me an email if you get an error message.
+
+### Recap
+
+Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you'll learn how to update your repository.
+
+## Using Git
+
+**TL;DR**: You'll use commit and push for like 85% of your version control needs.
+
+### Make some changes
+
+Git tracks your changes. So let's make some changes for Git to track.
+
+1.  Create a Quarto file. We have a lesson on Quarto later this quarter. Consider this a quick taste. In the Files pane, click on New Blank File \> Quarto Doc. Call it "myquarto.qmd".\
+    ![](images/image-1946016990.png){width="309"}
+
+2.  Add the following text to your Quarto document and save it.
+
+        ---
+        title: My Quarto Document
+        format: html
+        ---
+
+        This is a Quarto document. It combines text, code, and outputs like figures.
+
+        Let's pretend @fig-boring was way more interesting.
+
+        ```{r}`r ''`
+        #| label: fig-boring
+        #| fig-cap: A boring figure
+
+        x <- -5:5
+        y <- x^2
+        plot(x, y, type = "l")
+        ```
+
+    You'll understand what all this means after the Quarto lesson. For now, just know you're creating a dynamic HTML document with a bit of text and a figure.
+
+### `commit` your changes
+
+1.  Switch over to your Git pane. You should have three changed files waiting for you.\
+    ![](images/image-176023429.png)
+
+2.  Check the box for all three files (in the "Staged" column). The orange "?" will turn into a green "A", indicating you're adding these files to the repo.
+
+3.  Click the Commit button in the Git pane. The commit window will appear, showing you the **diff**, or the changes you made. Every commit has to have a commit message. Enter "Initial commit" and hit the "Commit" button.
+
+4.  Your Git pane should now be empty. This means all your changes have been tracked **locally**.
+
+`commit` is a local operation! It tracks things *just on your machine*. Now let's sync it up with GitHub.
+
+### `push` your commits
+
+This one is easy. Click Push in the Git pane.
+
+Head back over to GitHub in your browser. Refresh the page with your repository. It should now look like this:
+
+![](images/image-239767023.png){width="600"}
+
+Your local repository (on your machine) and your remote repository (on GitHub) are now in sync. This serves as valuable back up and makes sharing easy!
+
+## Blowing it up and starting over
+
+At some point you'll need to create another local copy of your repository (`clone` it from GitHub). Maybe you're working on another computer, or you're sharing your code with a collaborator, or Git did something weird and you need to blow it up and start over. Version control takes a very scary thing (re-creating your work from the ground up) and makes it easy.
+
+1.  Blow it all up. By which I mean, delete your local files. First, close RStudio. Then delete the directory holding your project/repo. If it was in \~/Documents/GitHub/myrepo/, then delete the myrepo/ directory.
+2.  `clone` it anew. Open RStudio. Create a new repository from version control as you did before.
+
+See! It's all there! We love it.
+
+## Sharing your work with GitHub Pages
+
+We're going to wrap up today's lesson with one of my favorite GitHub features: Pages. GitHub gives each repository it's own website. Quarto and its predecessor, RMarkdown, can turn your work into HTML pages. By combining these two, you have a fantastic way of sharing your work with your collaborators.
+
+### Create an HTML page
+
+1.  Open the "myrepo" project in RStudio
+2.  Open myquarto.qmd
+3.  Click "Render" at the top of the editing pane.
+
+This should create myquarto.html and a directory called myquarto_files.
+
+You just made some changes! Commit them, push them to GitHub, and check the website to make sure they show up.
+
+### Create a landing page in Markdown
+
+To use GitHub pages you'll need a landing page. We'll make one in Markdown. If this is your first time with Markdown don't worry, it's easy.
+
+1.  In the Files pane, create a new blank text file and call it "index.md". Make sure it's not index.md.txt.
+2.  Add some text to index.md explaining your project. E.g. "This project is how I'm learning Git and GitHub."
+3.  Add a link to your rendered Quarto document. In Markdown, links look like `[text](url)` . So add `[My first Quarto document](myquarto.html)` to index.md.
+4.  Commit and push!
+
+### Turn on GitHub Pages
+
+This involves changing a setting on the GitHub website.
+
+1.  In your browser, go to your GitHub repo.
+2.  Go to Settings \> Pages.
+3.  Under Branch, change "None" to "master" and hit Save. You should get a ribbon at the top that says "GitHub Pages source saved".
+4.  Switch from the Settings tab to Actions. You'll see jobs listed including "build" and "deploy". When they're complete (green checkmarks), navigate to \[your_username\].github.io/myrepo.
+
+This is a pretty trivial example, but it's hopefully enough to get you started. For a fully featured example, check out [Blue Whales and Lagrangian Features](https://physalus.github.io/Blue-Whales-and-Lagrangian-Features). My colleague, James Fahlbusch, used GitHub Pages to share an R Markdown report containing the analyses and results for the first chapter of his dissertation with his co-authors and advisor. The R Markdown document eventually became the Supplemental Material for his manuscript published in [Proceedings B](https://doi.org/10.1098/rspb.2022.1180). This is a great way to facilitate collaborations and can even make the publishing process easier!
+
+## Lesson recap
+
+-   Git and GitHub do have a learning curve, but they help you keep your analyses organized and safe.
+
+-   Using RStudio projects helps you integrate version control into your normal workflow (and they have other benefits too, like better file paths).
+
+-   There are a lot of Git commands, most only usable from the command line, but you'll get most of the benefits just from using `commit` and `push`.
+
+-   Once you start using Git and GitHub, you'll have access to a lot of the tools and features built on top of them. GitHub Pages are a good example, but that's only scratching the surface.
+
+## Resources
+
+-   [Happy Git With R](happygitwithr.com/)
+
+-   [R 4 Data Science](https://r4ds.had.co.nz/)

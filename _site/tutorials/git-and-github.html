@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Max Czapanskiy | Ecology and Data Science - Git and GitHub</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Max Czapanskiy | Ecology and Data Science</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../teaching.html">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pubs.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#pre-lesson-recap" id="toc-pre-lesson-recap" class="nav-link active" data-scroll-target="#pre-lesson-recap">Pre-lesson recap</a></li>
+  <li><a href="#todays-agenda" id="toc-todays-agenda" class="nav-link" data-scroll-target="#todays-agenda">Today’s agenda</a></li>
+  <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects">RStudio projects</a></li>
+  <li><a href="#using-git" id="toc-using-git" class="nav-link" data-scroll-target="#using-git">Using Git</a></li>
+  <li><a href="#blowing-it-up-and-starting-over" id="toc-blowing-it-up-and-starting-over" class="nav-link" data-scroll-target="#blowing-it-up-and-starting-over">Blowing it up and starting over</a></li>
+  <li><a href="#sharing-your-work-with-github-pages" id="toc-sharing-your-work-with-github-pages" class="nav-link" data-scroll-target="#sharing-your-work-with-github-pages">Sharing your work with GitHub Pages</a></li>
+  <li><a href="#lesson-recap" id="toc-lesson-recap" class="nav-link" data-scroll-target="#lesson-recap">Lesson recap</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Git and GitHub</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><strong>SCRUBs Lesson Friday January 27, 2023</strong></p>
+<section id="pre-lesson-recap" class="level2">
+<h2 class="anchored" data-anchor-id="pre-lesson-recap">Pre-lesson recap</h2>
+<p>Before today’s lesson, you should have:</p>
+<ul>
+<li><p>Familiarized yourself with the basics of Git and GitHub by reading <a href="https://doi.org/10.1080/00031305.2017.1399928">Bryan 2018</a> (PDF on SCRUBs Drive)</p></li>
+<li><p>Installed Git</p></li>
+<li><p>Connected RStudio to GitHub</p></li>
+</ul>
+</section>
+<section id="todays-agenda" class="level2">
+<h2 class="anchored" data-anchor-id="todays-agenda">Today’s agenda</h2>
+<p>The goal for today’s lesson is to get you <em>just enough</em> information to begin incorporating version control into your workflow. In order, we’ll cover:</p>
+<ol type="1">
+<li>RStudio projects</li>
+<li>Using Git</li>
+<li>Blowing it up and starting over</li>
+<li>Bonus: sharing your work with GitHub Pages</li>
+</ol>
+</section>
+<section id="rstudio-projects" class="level2">
+<h2 class="anchored" data-anchor-id="rstudio-projects">RStudio projects</h2>
+<p>You don’t <em>have to</em> use a project to use version control, but it sure does make it a lot easier. For more info about projects, see the <a href="https://r4ds.had.co.nz/workflow-projects.html">R for Data Science chapter</a>. Now let’s create an example RStudio project and connect it to GitHub. The preferred method for this is “New project, GitHub first”. See <a href="https://happygitwithr.com/new-github-first.html">Happy Git with R</a> for other options, but I suggest sticking with this one.</p>
+<section id="create-a-github-repo" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-github-repo">Create a GitHub repo</h3>
+<ol type="1">
+<li>Go to <a href="https://github.com">github.com</a></li>
+<li>Click the green “New” button to create a new repository</li>
+<li>Call it “myrepo” and click the green “Create repository” button<br>
+<img src="images/image-1927055850.png" class="img-fluid" width="600"></li>
+<li>Copy your repository link. It should be: https://github.com/[username]/myrepo.git.<br>
+<img src="images/image-1845780386.png" class="img-fluid" width="600"></li>
+</ol>
+</section>
+<section id="create-an-rstudio-project-with-your-repo" class="level3">
+<h3 class="anchored" data-anchor-id="create-an-rstudio-project-with-your-repo">Create an RStudio project with your repo</h3>
+<p>Congratulations - you’ve created a Git repository! But right now it only lives on GitHub’s server. Let’s bring it down to your computer (<code>clone</code> your repo, in Git lingo).</p>
+<ol type="1">
+<li>Open RStudio</li>
+<li>File &gt; New Project &gt; Version Control<br>
+<img src="images/image-658292087.png" class="img-fluid" width="417"></li>
+<li>Choose Git for your version control then paste your repository link.</li>
+</ol>
+<p>You now have a local copy of your repository that you can use for data analysis. A few things you should see in RStudio now:</p>
+<p><img src="images/image-997594596.png" class="img-fluid" width="600"></p>
+<ul>
+<li><p>The Git pane is where you’ll make Git do things. This is RStudio’s way of helping us avoid the command line and we’re very grateful for that.</p></li>
+<li><p>Your project name should now be visible in the top-right corner. Among other things, this means you’ll never have to call <code>setwd()</code> ever again. All R commands will execute relative to your project’s directory. You have no idea the number of problems this will help you avoid. Git aside, it’s reason enough to use projects.</p></li>
+<li><p>You’ve got some new files.</p>
+<ul>
+<li><p>A directory called “.git”. NEVER TOUCH THIS. Forget it exists. Seriously.</p></li>
+<li><p>A text file called .gitignore. This is how you tell Git to ignore certain files, like sensitive data or very large files that are too big for GitHub.</p></li>
+<li><p>A project file called myrepo.Rproj. This is how RStudio knows you have a project. It’ll just hang out and make your life easier, you don’t have to do anything with it.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="project-dos-and-donts-donts" class="level3">
+<h3 class="anchored" data-anchor-id="project-dos-and-donts-donts">Project do’s and don’ts (don’t’s?)</h3>
+<ul>
+<li><p><strong>No nesting</strong>. Never put a project inside of another one. You want a flat hierarchy. Think Kansas: flatter than a pancake.</p></li>
+<li><p><strong>Cloud storage <em>can</em> cause headaches</strong>. If you use Drive, Box, or another service for syncing files you should probably put your projects somewhere else, like a local or external hard drive. Cloud sync software creates hidden files and modifies existing files in unpredictable ways that can make projects and version control puke all over themselves at random intervals. That said, if it’s your only choice, go for it. Then send me an email if you get an error message.</p></li>
+</ul>
+</section>
+<section id="recap" class="level3">
+<h3 class="anchored" data-anchor-id="recap">Recap</h3>
+<p>Congrats, you created a Git repository and turned it into an RStudio project on your local machine. But if you go back to GitHub and check out your repository, it will still look empty. In the next section, you’ll learn how to update your repository.</p>
+</section>
+</section>
+<section id="using-git" class="level2">
+<h2 class="anchored" data-anchor-id="using-git">Using Git</h2>
+<p><strong>TL;DR</strong>: You’ll use commit and push for like 85% of your version control needs.</p>
+<section id="make-some-changes" class="level3">
+<h3 class="anchored" data-anchor-id="make-some-changes">Make some changes</h3>
+<p>Git tracks your changes. So let’s make some changes for Git to track.</p>
+<ol type="1">
+<li><p>Create a Quarto file. We have a lesson on Quarto later this quarter. Consider this a quick taste. In the Files pane, click on New Blank File &gt; Quarto Doc. Call it “myquarto.qmd”.<br>
+<img src="images/image-1946016990.png" class="img-fluid" width="309"></p></li>
+<li><p>Add the following text to your Quarto document and save it.</p>
+<pre><code>---
+title: My Quarto Document
+format: html
+---
+
+This is a Quarto document. It combines text, code, and outputs like figures.
+
+Let's pretend @fig-boring was way more interesting.
+
+
+```{r}
+#| label: fig-boring
+#| fig-cap: A boring figure
+
+x &lt;- -5:5
+y &lt;- x^2
+plot(x, y, type = "l")
+```</code></pre>
+<p>You’ll understand what all this means after the Quarto lesson. For now, just know you’re creating a dynamic HTML document with a bit of text and a figure.</p></li>
+</ol>
+</section>
+<section id="commit-your-changes" class="level3">
+<h3 class="anchored" data-anchor-id="commit-your-changes"><code>commit</code> your changes</h3>
+<ol type="1">
+<li><p>Switch over to your Git pane. You should have three changed files waiting for you.<br>
+<img src="images/image-176023429.png" class="img-fluid"></p></li>
+<li><p>Check the box for all three files (in the “Staged” column). The orange “?” will turn into a green “A”, indicating you’re adding these files to the repo.</p></li>
+<li><p>Click the Commit button in the Git pane. The commit window will appear, showing you the <strong>diff</strong>, or the changes you made. Every commit has to have a commit message. Enter “Initial commit” and hit the “Commit” button.</p></li>
+<li><p>Your Git pane should now be empty. This means all your changes have been tracked <strong>locally</strong>.</p></li>
+</ol>
+<p><code>commit</code> is a local operation! It tracks things <em>just on your machine</em>. Now let’s sync it up with GitHub.</p>
+</section>
+<section id="push-your-commits" class="level3">
+<h3 class="anchored" data-anchor-id="push-your-commits"><code>push</code> your commits</h3>
+<p>This one is easy. Click Push in the Git pane.</p>
+<p>Head back over to GitHub in your browser. Refresh the page with your repository. It should now look like this:</p>
+<p><img src="images/image-239767023.png" class="img-fluid" width="600"></p>
+<p>Your local repository (on your machine) and your remote repository (on GitHub) are now in sync. This serves as valuable back up and makes sharing easy!</p>
+</section>
+</section>
+<section id="blowing-it-up-and-starting-over" class="level2">
+<h2 class="anchored" data-anchor-id="blowing-it-up-and-starting-over">Blowing it up and starting over</h2>
+<p>At some point you’ll need to create another local copy of your repository (<code>clone</code> it from GitHub). Maybe you’re working on another computer, or you’re sharing your code with a collaborator, or Git did something weird and you need to blow it up and start over. Version control takes a very scary thing (re-creating your work from the ground up) and makes it easy.</p>
+<ol type="1">
+<li>Blow it all up. By which I mean, delete your local files. First, close RStudio. Then delete the directory holding your project/repo. If it was in ~/Documents/GitHub/myrepo/, then delete the myrepo/ directory.</li>
+<li><code>clone</code> it anew. Open RStudio. Create a new repository from version control as you did before.</li>
+</ol>
+<p>See! It’s all there! We love it.</p>
+</section>
+<section id="sharing-your-work-with-github-pages" class="level2">
+<h2 class="anchored" data-anchor-id="sharing-your-work-with-github-pages">Sharing your work with GitHub Pages</h2>
+<p>We’re going to wrap up today’s lesson with one of my favorite GitHub features: Pages. GitHub gives each repository it’s own website. Quarto and its predecessor, RMarkdown, can turn your work into HTML pages. By combining these two, you have a fantastic way of sharing your work with your collaborators.</p>
+<section id="create-an-html-page" class="level3">
+<h3 class="anchored" data-anchor-id="create-an-html-page">Create an HTML page</h3>
+<ol type="1">
+<li>Open the “myrepo” project in RStudio</li>
+<li>Open myquarto.qmd</li>
+<li>Click “Render” at the top of the editing pane.</li>
+</ol>
+<p>This should create myquarto.html and a directory called myquarto_files.</p>
+<p>You just made some changes! Commit them, push them to GitHub, and check the website to make sure they show up.</p>
+</section>
+<section id="create-a-landing-page-in-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-landing-page-in-markdown">Create a landing page in Markdown</h3>
+<p>To use GitHub pages you’ll need a landing page. We’ll make one in Markdown. If this is your first time with Markdown don’t worry, it’s easy.</p>
+<ol type="1">
+<li>In the Files pane, create a new blank text file and call it “index.md”. Make sure it’s not index.md.txt.</li>
+<li>Add some text to index.md explaining your project. E.g. “This project is how I’m learning Git and GitHub.”</li>
+<li>Add a link to your rendered Quarto document. In Markdown, links look like <code>[text](url)</code> . So add <code>[My first Quarto document](myquarto.html)</code> to index.md.</li>
+<li>Commit and push!</li>
+</ol>
+</section>
+<section id="turn-on-github-pages" class="level3">
+<h3 class="anchored" data-anchor-id="turn-on-github-pages">Turn on GitHub Pages</h3>
+<p>This involves changing a setting on the GitHub website.</p>
+<ol type="1">
+<li>In your browser, go to your GitHub repo.</li>
+<li>Go to Settings &gt; Pages.</li>
+<li>Under Branch, change “None” to “master” and hit Save. You should get a ribbon at the top that says “GitHub Pages source saved”.</li>
+<li>Switch from the Settings tab to Actions. You’ll see jobs listed including “build” and “deploy”. When they’re complete (green checkmarks), navigate to [your_username].github.io/myrepo.</li>
+</ol>
+<p>This is a pretty trivial example, but it’s hopefully enough to get you started. For a fully featured example, check out <a href="https://physalus.github.io/Blue-Whales-and-Lagrangian-Features">Blue Whales and Lagrangian Features</a>. My colleague, James Fahlbusch, used GitHub Pages to share an R Markdown report containing the analyses and results for the first chapter of his dissertation with his co-authors and advisor. The R Markdown document eventually became the Supplemental Material for his manuscript published in <a href="https://doi.org/10.1098/rspb.2022.1180">Proceedings B</a>. This is a great way to facilitate collaborations and can even make the publishing process easier!</p>
+</section>
+</section>
+<section id="lesson-recap" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-recap">Lesson recap</h2>
+<ul>
+<li><p>Git and GitHub do have a learning curve, but they help you keep your analyses organized and safe.</p></li>
+<li><p>Using RStudio projects helps you integrate version control into your normal workflow (and they have other benefits too, like better file paths).</p></li>
+<li><p>There are a lot of Git commands, most only usable from the command line, but you’ll get most of the benefits just from using <code>commit</code> and <code>push</code>.</p></li>
+<li><p>Once you start using Git and GitHub, you’ll have access to a lot of the tools and features built on top of them. GitHub Pages are a good example, but that’s only scratching the surface.</p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><p><a href="happygitwithr.com/">Happy Git With R</a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/">R 4 Data Science</a></p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
