@@ -1,0 +1,65 @@
+---
+title: "Uploading data to OSF in R"
+description: "I'm learning to navigate the Open Science Framework (OSF), but ran into issues uploading a directory to my project. Here's how I did it in R."
+author:
+  - name: Max Czapanskiy
+date: 03-09-2023
+image: preview-image.png
+categories: [R, OSF, reproducibility]
+bibliography: references.bib
+---
+
+How do we keep our data and code in-sync while an analysis is in progress? This came up for me recently when my laptop went down[^1]. All my code was in a GitHub repo, but the data were scattered across a couple Google Drive folders shared with me by collaborators. Although [@tierney2020] give excellent advice for how to link the two *after* an analysis is complete and heading to publication, what should I do for a work in progress when the data are too large for GitHub or can't be shared publicly yet?
+
+[^1]: I can't remember who pointed this out or where I read it, but IIRC the average hard drive lifespan is shorter than the average duration of a PhD. So make sure you keep a backup!
+
+I'm using this as an opportunity to explore the [Open Science Framework](osf.io) (OSF) and see if I should incorporate it into my workflow. I created a new project (private for now) and linked it to my GitHub repo. Then I tried uploading my data, which are in nested directories, and learned you can only upload files through the OSF interface, not a whole directory structure.
+
+Naturally I turned to R. Here's what worked for me.
+
+## Connect to OSF
+
+We're using the `osfr` package for this task. Thanks ROpenSci! The [authentication vignette](https://docs.ropensci.org/osfr/articles/auth.html) does a good job explaining how to get a personal access token (PAT). You can create an .Renviron file in your project repository and add your PAT with this code. Remember to replace `[YOUR OSF PAT]` with your actual OSF PAT!
+
+```{r}
+#| label: pat
+#| eval: false
+
+file.create(".Renviron")
+writeLines("OSF_PAT=[YOUR OSF PAT]", ".Renviron")
+
+```
+
+After you restart your R session, you should be able to access your OSF projects.
+
+## Retrieve your node
+
+Your OSF project is a "node" and the data files and directories within it are its child nodes. To upload files, you need a handle to the right directory. I made a directory called "data" in my OSF storage, where I'm going to upload everything.
+
+```{r}
+#| label: nodes
+
+library(osfr)
+# Retrieve the Antarctic Winter Communities project node
+antwincomm_prj <- osf_retrieve_node("https://osf.io/hwnvy/")
+# Sanity check the project and file structure
+antwincomm_prj
+osf_ls_files(antwincomm_prj)
+# Retreive the "data" node
+antwincomm_files <- osf_ls_files(antwincomm_prj)
+antwincomm_data <- antwincomm_files[antwincomm_files$name == "data"]
+
+```
+
+## Upload directory
+
+Once you have the handle to your data directory then `osf_upload()` will do the rest. Tell it to include subdirectories with `recurse` and, if you have a lot of files, set `progress` to `TRUE` so you can keep an eye on it.
+
+```{r}
+#| label: upload
+#| eval: false
+
+local_data <- "path/to/your/data/here"
+osf_upload(antwincomm_data, local_data, recurse = TRUE, progress = TRUE)
+
+```

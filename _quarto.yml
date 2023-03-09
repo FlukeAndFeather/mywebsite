@@ -11,6 +11,7 @@ website:
       - research.qmd
       - href: pubs.qmd
         text: Publications
+      - href: posts.qmd
   search: false
 
 format:
