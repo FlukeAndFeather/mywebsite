@@ -22,4 +22,6 @@ I make tutorials for R and data science workshops. You're welcome to repurpose t
 
 ### Git and GitHub
 
+[SCRUBs Lesson for Friday March 17, 2023](posts/2023-03-17-intro-reticulate/)
+
 [SCRUBs Lesson for Friday January 27, 2023](tutorials/git-and-github.qmd)

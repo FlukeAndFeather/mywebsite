@@ -1,0 +1,164 @@
+---
+title: "Python and R together with reticulate"
+description: "Intro to reticulate lesson for SCRUBs"
+author:
+  - name: Max Czapanskiy
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+date: 03-17-2023
+image: reticulated_python.png
+categories: [R, Python, reticulate, SCRUBs]
+---
+
+## Reticulate
+
+Use R and Python together! Note: this lesson is for reticulate specifically. It's not a Python lesson. But if you don't know Python you should still be able to follow along with a friend.
+
+## Setup
+
+Create an RStudio project, then create a Quarto document.
+
+### Install Python
+
+So many ways. Too many ways! Here's one. Do this from the R console.
+
+```{r}
+#| label: install-python
+#| eval: false
+
+install.packages("reticulate")
+reticulate::install_miniconda()
+
+```
+
+### Create a virtual environment
+
+You likely keep all your installed R packages in one library. The standard practice in Python is to create separate environments for projects instead. Conda helps us do that. Still in the console!
+
+```{r}
+#| label: setup-env
+#| eval: false
+
+reticulate::conda_create(
+  "intro-reticulate", 
+  packages = c("jupyter", "numpy", "pandas", "scikit-learn")
+)
+reticulate::use_condaenv("intro-reticulate")
+reticulate::py_config() # Are you in the right place?
+
+```
+
+We just created a Conda environment *and* installed some useful Python packages. jupyter is the Python equivalent to knitr, numpy lets you work with numbers, pandas lets you work with data frames, and scikit-learn is for machine learning.
+
+## Tidy Tuesday
+
+Learn reticulate with a [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) exercise. Specifically [Numbats](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-03-07/readme.md).
+
+### Load the data
+
+We can do that with R. In your Quarto document, create an R code chunk and download the Tidy Tuesday data.
+
+```{r}
+#| label: load-data
+
+# install.packages("tidytuesdayR")
+library(tidyverse)
+
+numbats_tidytuesday <- tidytuesdayR::tt_load(2023, week = 10)
+numbats <- numbats_tidytuesday$numbats
+numbats
+
+```
+
+### Numbat circadian rhythms
+
+Were numbats sighted during the day or at night? Create another R chunk and categorize sighting time of day into day and night. The numbers look pretty even! But could environmental covariates influence that?
+
+```{r}
+#| label: circadian
+
+numbats <- numbats %>% 
+  mutate(is_day = hour >= 6 & hour <= 18) %>% 
+  drop_na(is_day, prcp, tmax)
+count(numbats, is_day)
+
+```
+
+### R to Python
+
+Let's use Python to figure out if precipitation and temperature affects the likelihood of seeing numbats at night. Create a **Python** code chunk.
+
+```{python}
+#| label: py-logit
+
+# This is like "library()" in R
+from sklearn.linear_model import LogisticRegression
+# Use `r.___` to access R objects
+enviro = r.numbats[["prcp", "tmax"]]
+is_day = r.numbats["is_day"]
+# Fit a classifier (clf)
+clf = LogisticRegression(random_state=0).fit(enviro, is_day)
+
+```
+
+Well done! You just fit a classifier in Python to data you loaded and cleaned with R. That's pretty cool! Let's make some predictions on a reference grid.
+
+```{python}
+#| label: py-predict
+
+import numpy as np
+import pandas as pd
+from sklearn.utils.extmath import cartesian
+
+# The precipitation and temperature values we want to make predictions for
+prcp = np.arange(r.numbats["prcp"].min(), r.numbats["prcp"].max(), 0.1)
+tmax = np.arange(r.numbats["tmax"].min(), r.numbats["tmax"].max(), 0.2)
+# All combinations of prcp and tmax
+ref_grid = pd.DataFrame(cartesian((prcp, tmax)), columns=["prcp", "tmax"])
+# Predict the probability of "is_day". predict_proba() returns two columns,
+# p(!is_day) and p(is_day). Remember `[:, 1]` gets the *second* column 
+# because Python uses 0-indexing
+ref_grid["is_day"] = clf.predict_proba(ref_grid)[:, 1]
+ref_grid
+
+```
+
+### Python to R
+
+Now we'll use R to visualize the model predictions generated in Python. Make another R code chunk.
+
+```{r}
+#| label: viz-predict
+
+library(reticulate)
+
+# Use py$____ to get python objects
+predict_prcp <- py$ref_grid %>% 
+  # For each precipitation value, get the prediction at the median tmax
+  group_by(prcp) %>% 
+  summarize(is_day = is_day[tmax = median(numbats$tmax)])
+
+numbats %>% 
+  mutate(is_day = as.numeric(is_day)) %>% 
+  ggplot(aes(prcp, is_day)) +
+  geom_point() +
+  geom_line(data = predict_prcp) +
+  theme_classic()
+
+```
+
+Is this a bad model? You know it! But that's not the point.
+
+## Wrap up
+
+-   The reticulate package connects R and Python
+
+-   Python installations are a lot more variable (and tricky!) than R
+
+-   You can use both R and Python code, sharing data, in Quarto documents
+
+-   R -\> Python with `r.___`
+
+-   Python -\> R with `py$___` (must `library(reticulate)` first!)
