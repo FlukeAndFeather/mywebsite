@@ -84,6 +84,13 @@
     "text": "Wrap up\n\nThe reticulate package connects R and Python\nPython installations are a lot more variable (and tricky!) than R\nYou can use both R and Python code, sharing data, in Quarto documents\nR -> Python with r.___\nPython -> R with py$___ (must library(reticulate) first!)"
   },
   {
+    "objectID": "posts/2023-04-11-renew-pat/index.html",
+    "href": "posts/2023-04-11-renew-pat/index.html",
+    "title": "Renewing a GitHub PAT",
+    "section": "",
+    "text": "Generate a new token by calling usethis::create_github_token() from your R console (e.g., in RStudio). This launches GitHub in your browser. Sign in if necessary.\nYou should be at the “New personal access token” page. Change the Note to “RSTUDIO” or something similar. I like to set the Expiration to 90 days. Don’t change any of the check boxes. Scroll to the bottom and click the green “Generate token” button.\n\n\nIf you get an error saying “Note has already been taken”, call your token something else, like RSTUDIO2.\n\nYou should now see your list of tokens. The top one should be highlighted in green and look like a long string of random characters. Copy the whole thing using the copy icon just to the right of it.\n\nIf you encountered the error in step 2, use this opportunity to delete your expired “RSTUDIO” token.\n\nBack to RStudio. Again at the console, call gitcreds::gitcreds_set(). Notice you don’t give the function call any arguments, just hit enter.\n\nYou should see a prompt asking what to do with your current credentials. Choose “Replace these credentials”.\nPaste your token at the “Enter new password or token” prompt and hit enter.\n\nThat should do it!"
+  },
+  {
     "objectID": "posts/2023-03-09-osfr-data/index.html",
     "href": "posts/2023-03-09-osfr-data/index.html",
     "title": "Uploading data to OSF in R",
@@ -137,7 +144,7 @@
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "Python and R together with reticulate\n\n\n\nR\n\n\nPython\n\n\nreticulate\n\n\nSCRUBs\n\n\n\nIntro to reticulate lesson for SCRUBs\n\n\n\nMax Czapanskiy\n\n\nMar 17, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUploading data to OSF in R\n\n\n\nR\n\n\nOSF\n\n\nreproducibility\n\n\n\nI’m learning to navigate the Open Science Framework (OSF), but ran into issues uploading a directory to my project. Here’s how I did it in R.\n\n\n\nMax Czapanskiy\n\n\nMar 9, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Renewing a GitHub PAT\n\n\n\nR\n\n\ngit\n\n\nGitHub\n\n\n\nWhat to do when your GitHub personal access token (PAT) expires.\n\n\n\nMax Czapanskiy\n\n\nApr 11, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython and R together with reticulate\n\n\n\nR\n\n\nPython\n\n\nreticulate\n\n\nSCRUBs\n\n\n\nIntro to reticulate lesson for SCRUBs\n\n\n\nMax Czapanskiy\n\n\nMar 17, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUploading data to OSF in R\n\n\n\nR\n\n\nOSF\n\n\nreproducibility\n\n\n\nI’m learning to navigate the Open Science Framework (OSF), but ran into issues uploading a directory to my project. Here’s how I did it in R.\n\n\n\nMax Czapanskiy\n\n\nMar 9, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tutorials/git-and-github.html",

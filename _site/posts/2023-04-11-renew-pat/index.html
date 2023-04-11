@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Max Czapanskiy">
+<meta name="dcterms.date" content="2023-04-11">
+<meta name="description" content="What to do when your GitHub personal access token (PAT) expires.">
 
-<title>Max Czapanskiy | Ecology and Data Science -</title>
+<title>Max Czapanskiy | Ecology and Data Science - Renewing a GitHub PAT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,20 +26,18 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -52,17 +53,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Max Czapanskiy | Ecology and Data Science</span>
     </a>
   </div>
@@ -72,23 +73,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="../../about.html">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./teaching.html">
+    <a class="nav-link" href="../../teaching.html">
  <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html">
+    <a class="nav-link" href="../../research.html">
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pubs.html">
+    <a class="nav-link" href="../../pubs.html">
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./posts.html">
+    <a class="nav-link" href="../../posts.html">
  <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -97,39 +98,75 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-layout-custom page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Renewing a GitHub PAT</h1>
+                  <div>
+        <div class="description">
+          What to do when your GitHub personal access token (PAT) expires.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">git</div>
+                <div class="quarto-category">GitHub</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Max Czapanskiy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 11, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
+    
 <!-- main -->
-
-
-
-<div class="grid">
-<div class="g-col-1">
-<!-- Left margin -->
-</div>
-<div class="g-col-4">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/headshot.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Fig 1: Scientist wearing a beanie</figcaption><p></p>
-</figure>
-</div>
-</div>
-<section id="max-czapanskiy" class="level1 g-col-6">
-<h1>Max Czapanskiy</h1>
-<p><strong>Ecology | Data Science</strong></p>
-<p>Postdoctoral scholar with NOAA’s Southwest Fisheries Science Center and UC Santa Cruz’s Ocean Sciences Department working at the intersection of ecology and software engineering. I develop educational resources and computational tools that promote open science.</p>
-<p><a href="mailto:maxczapanskiy@gmail.com"><i class="bi bi-envelope"></i></a> <a href="https://github.com/FlukeAndFeather"><i class="bi bi-github"></i></a> <a href="https://scholar.google.com/citations?user=YgvDDvMAAAAJ&amp;hl=en"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a href="https://orcid.org/0000-0002-6302-905X"><i class="ai  ai-orcid" title="" style="color:"></i></a> <a href="assets/Czapanskiy_CV.pdf"><i class="ai  ai-cv" title="" style="color:"></i></a></p>
-</section>
-<div class="g-col-1">
-<!-- Right margin -->
-</div>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
+<ol type="1">
+<li>Generate a new token by calling <code>usethis::create_github_token()</code> from your R console (e.g., in RStudio). This launches GitHub in your browser. Sign in if necessary.</li>
+<li>You should be at the “New personal access token” page. Change the <strong>Note</strong> to “RSTUDIO” or something similar. I like to set the Expiration to 90 days. Don’t change any of the check boxes. Scroll to the bottom and click the green “Generate token” button.<br>
+<img src="github_pat.png" class="img-fluid" width="600" alt="Screen shot of the GitHub prompt to create a new personal access token">
+<ol type="1">
+<li>If you get an error saying “Note has already been taken”, call your token something else, like RSTUDIO2.</li>
+</ol></li>
+<li>You should now see your list of tokens. The top one should be highlighted in green and look like a long string of random characters. Copy the whole thing using the copy icon just to the right of it.
+<ol type="1">
+<li>If you encountered the error in step 2, use this opportunity to delete your expired “RSTUDIO” token.</li>
+</ol></li>
+<li>Back to RStudio. Again at the console, call <code>gitcreds::gitcreds_set()</code>. Notice you don’t give the function call any arguments, just hit enter.<br>
+<img src="gitcreds_set.png" class="img-fluid" width="344" alt="Screen shot of the prompt generated by gitcreds set when replacing the GitHub PAT"></li>
+<li>You should see a prompt asking what to do with your current credentials. Choose “Replace these credentials”.</li>
+<li>Paste your token at the “Enter new password or token” prompt and hit enter.</li>
+</ol>
+<p>That should do it!</p>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
