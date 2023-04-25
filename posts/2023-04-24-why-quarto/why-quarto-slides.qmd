@@ -1,0 +1,146 @@
+---
+title: Why Quarto?
+author:
+  - name: Max Czapanskiy
+format: 
+  revealjs:
+    incremental: true
+bibliography: references-slides.bib
+categories: [resource]
+---
+
+## Why Quarto?
+
+I barely wrapped my head around R Markdown. Now I have to learn something new?
+
+## It's just friendlier
+
+-   Backwards compatible (most everything you learned still works)
+
+-   Consistent syntax (smooths over some weird R Markdown bumps)
+
+-   Multi-language support (if that applies to you in the future)
+
+## Context: *literate programming*
+
+-   Combine text, code, and outputs (figures etc). Great for scientific analysis!
+
+-   Useful for all stages of the scientific analysis pipeline
+
+    -   Exploratory analysis (with collaborators!)
+
+    -   Technical writing (like cross-references and citations!)
+
+    -   Science communication (websites and more!)
+
+## Exploratory analysis (with collaborators!)
+
+::: columns
+::: {.column width="40%"}
+Project structure:
+
+-   A [GitHub repo](https://github.com/FlukeAndFeather/antwincomm)
+
+-   A directory of Quarto documents
+
+-   A [landing page](https://flukeandfeather.github.io/antwincomm/)
+:::
+
+::: {.column width="60%"}
+![](survey_effort-1.png)
+:::
+:::
+
+## Exploratory analysis (with collaborators!)
+
+::: columns
+::: column
+### Park downhill
+
+-   You're going to take breaks
+
+-   Quarto keeps your notes, code, and figures in sync
+
+-   Jump back in faster!
+:::
+
+::: column
+### Productive 1-on-1 and team meetings
+
+-   Send an email with links to updates
+
+-   Keep progress in context
+
+-   More in depth feedback, better planning
+:::
+:::
+
+## Communicating your science (technical writing)
+
+::: columns
+::: column
+-   Create a figure in code
+
+-   Give it a name e.g., `fig-regression`
+
+-   Cross-reference it with `@fig-regression`
+
+-   Quarto turns it into @fig-regression
+:::
+
+::: column
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+```
+
+```{r}
+#| label: fig-regression
+#| fig-cap: y is correlated with x, isn't that swell?
+#| echo: fenced
+
+set.seed(1057)
+dat <- tibble(
+  x = runif(25),
+  y = 3 * x + 1 + rnorm(25)
+)
+ggplot(dat, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x) +
+  theme_classic()
+```
+:::
+:::
+
+## Communicating your science (references)
+
+::: columns
+::: {.column width="60%"}
+-   Look up the DOI
+
+-   Use RStudio crossref lookup
+
+-   Turn [`@10.3389/fphys.2022.917976`]{style="font-size: 1.5rem;"}
+
+-   Into @czapanskiy2022
+:::
+
+::: {.column width="40%"}
+![](quarto-bib.gif)
+:::
+:::
+
+## Bonus!
+
+-   [Make a personal website](https://cmhale98.github.io/) to showcase your research
+
+-   [Or a course website](https://allisonpayne.github.io/queerecologies/) for your teaching portfolio
+
+-   [Excellent tutorial by Samantha Csik](https://ucsb-meds.github.io/creating-quarto-websites/)
+
+## Refs
+
+::: {#refs}
+:::

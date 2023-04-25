@@ -2,42 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://flukeandfeather.com/teaching.html</loc>
-    <lastmod>2023-04-11T18:37:44.905Z</lastmod>
+    <lastmod>2023-04-25T19:26:31.360Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/research.html</loc>
-    <lastmod>2023-04-11T18:37:45.307Z</lastmod>
+    <lastmod>2023-04-25T19:26:31.734Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/posts/2023-03-17-intro-reticulate/index.html</loc>
-    <lastmod>2023-04-11T18:37:46.005Z</lastmod>
+    <lastmod>2023-04-25T19:26:32.978Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/posts/2023-04-11-renew-pat/index.html</loc>
-    <lastmod>2023-04-11T18:37:46.414Z</lastmod>
+    <lastmod>2023-04-25T19:26:33.726Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flukeandfeather.com/posts/2023-04-24-why-quarto/why-quarto-slides.html</loc>
+    <lastmod>2023-04-25T19:26:34.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flukeandfeather.com/posts/2023-04-24-why-quarto/index.html</loc>
+    <lastmod>2023-04-25T19:26:35.413Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/posts/2023-03-09-osfr-data/index.html</loc>
-    <lastmod>2023-04-11T18:37:47.111Z</lastmod>
+    <lastmod>2023-04-25T19:26:36.575Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/index.html</loc>
-    <lastmod>2023-04-11T18:37:47.497Z</lastmod>
+    <lastmod>2023-04-25T19:26:37.127Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/about.html</loc>
-    <lastmod>2023-04-11T18:37:48.260Z</lastmod>
+    <lastmod>2023-04-25T19:26:37.545Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/pubs.html</loc>
-    <lastmod>2023-04-11T18:37:52.278Z</lastmod>
+    <lastmod>2023-04-25T19:26:39.878Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/posts.html</loc>
-    <lastmod>2023-04-11T18:37:52.721Z</lastmod>
+    <lastmod>2023-04-25T19:26:40.345Z</lastmod>
   </url>
   <url>
     <loc>https://flukeandfeather.com/tutorials/git-and-github.html</loc>
-    <lastmod>2023-04-11T18:37:56.395Z</lastmod>
+    <lastmod>2023-04-25T19:26:41.888Z</lastmod>
   </url>
 </urlset>

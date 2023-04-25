@@ -91,6 +91,104 @@
     "text": "Generate a new token by calling usethis::create_github_token() from your R console (e.g., in RStudio). This launches GitHub in your browser. Sign in if necessary.\nYou should be at the “New personal access token” page. Change the Note to “RSTUDIO” or something similar. I like to set the Expiration to 90 days. Don’t change any of the check boxes. Scroll to the bottom and click the green “Generate token” button.\n\n\nIf you get an error saying “Note has already been taken”, call your token something else, like RSTUDIO2.\n\nYou should now see your list of tokens. The top one should be highlighted in green and look like a long string of random characters. Copy the whole thing using the copy icon just to the right of it.\n\nIf you encountered the error in step 2, use this opportunity to delete your expired “RSTUDIO” token.\n\nBack to RStudio. Again at the console, call gitcreds::gitcreds_set(). Notice you don’t give the function call any arguments, just hit enter.\n\nYou should see a prompt asking what to do with your current credentials. Choose “Replace these credentials”.\nPaste your token at the “Enter new password or token” prompt and hit enter.\n\nThat should do it!"
   },
   {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#why-quarto",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#why-quarto",
+    "title": "Why Quarto?",
+    "section": "Why Quarto?",
+    "text": "Why Quarto?\nI barely wrapped my head around R Markdown. Now I have to learn something new?"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#its-just-friendlier",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#its-just-friendlier",
+    "title": "Why Quarto?",
+    "section": "It’s just friendlier",
+    "text": "It’s just friendlier\n\nBackwards compatible (most everything you learned still works)\nConsistent syntax (smooths over some weird R Markdown bumps)\nMulti-language support (if that applies to you in the future)"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#context-literate-programming",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#context-literate-programming",
+    "title": "Why Quarto?",
+    "section": "Context: literate programming",
+    "text": "Context: literate programming\n\nCombine text, code, and outputs (figures etc). Great for scientific analysis!\nUseful for all stages of the scientific analysis pipeline\n\nExploratory analysis (with collaborators!)\nTechnical writing (like cross-references and citations!)\nScience communication (websites and more!)"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#exploratory-analysis-with-collaborators",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#exploratory-analysis-with-collaborators",
+    "title": "Why Quarto?",
+    "section": "Exploratory analysis (with collaborators!)",
+    "text": "Exploratory analysis (with collaborators!)\n\n\nProject structure:\n\nA GitHub repo\nA directory of Quarto documents\nA landing page"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#exploratory-analysis-with-collaborators-1",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#exploratory-analysis-with-collaborators-1",
+    "title": "Why Quarto?",
+    "section": "Exploratory analysis (with collaborators!)",
+    "text": "Exploratory analysis (with collaborators!)\n\n\nPark downhill\n\nYou’re going to take breaks\nQuarto keeps your notes, code, and figures in sync\nJump back in faster!\n\n\nProductive 1-on-1 and team meetings\n\nSend an email with links to updates\nKeep progress in context\nMore in depth feedback, better planning"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#communicating-your-science-technical-writing",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#communicating-your-science-technical-writing",
+    "title": "Why Quarto?",
+    "section": "Communicating your science (technical writing)",
+    "text": "Communicating your science (technical writing)\n\n\n\nCreate a figure in code\nGive it a name e.g., fig-regression\nCross-reference it with @fig-regression\nQuarto turns it into Figure 1\n\n\n\n\n\n\n```{r}\n#| label: fig-regression\n#| fig-cap: y is correlated with x, isn't that swell?\n\nset.seed(1057)\ndat <- tibble(\n  x = runif(25),\n  y = 3 * x + 1 + rnorm(25)\n)\nggplot(dat, aes(x, y)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", formula = y ~ x) +\n  theme_classic()\n```\n\n\n\n\nFigure 1: y is correlated with x, isn’t that swell?"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#communicating-your-science-references",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#communicating-your-science-references",
+    "title": "Why Quarto?",
+    "section": "Communicating your science (references)",
+    "text": "Communicating your science (references)\n\n\n\nLook up the DOI\nUse RStudio crossref lookup\nTurn @10.3389/fphys.2022.917976\nInto Czapanskiy and Beltran (2022)"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#bonus",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#bonus",
+    "title": "Why Quarto?",
+    "section": "Bonus!",
+    "text": "Bonus!\n\nMake a personal website to showcase your research\nOr a course website for your teaching portfolio\nExcellent tutorial by Samantha Csik"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/why-quarto-slides.html#refs",
+    "href": "posts/2023-04-24-why-quarto/why-quarto-slides.html#refs",
+    "title": "Why Quarto?",
+    "section": "Refs",
+    "text": "Refs\n\n\nCzapanskiy, Max F., and Roxanne S. Beltran. 2022. “How Reproducibility Will Accelerate Discovery Through Collaboration in Physio-Logging.” Frontiers in Physiology 13 (July). https://doi.org/10.3389/fphys.2022.917976."
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/index.html",
+    "href": "posts/2023-04-24-why-quarto/index.html",
+    "title": "Why Quarto?",
+    "section": "",
+    "text": "Quarto, like its predecessor, R Markdown, is a framework for integrating code, text, figures, and more. As an implementation of literate programming1, Quarto is great for all stages of the scientific workflow! The following sections give examples of how to use Quarto for exploring data with collaborators and for communicating your science\nView as slideshow"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/index.html#exploratory-analysis-with-collaborators",
+    "href": "posts/2023-04-24-why-quarto/index.html#exploratory-analysis-with-collaborators",
+    "title": "Why Quarto?",
+    "section": "Exploratory analysis with collaborators",
+    "text": "Exploratory analysis with collaborators\nIt’s unrealistic to expect we can jump directly from data collection to the final analysis. Science in general, but especially field science with all its unpredictability, is built from iterative explorations. It’s so, so easy to lose track of what you’ve tried, why you tried it, and what did or didn’t work. Quarto is great for keeping track of your efforts and sharing them with collaborators.\nMy work on the Antarctic Winter Community project is an example of this approach. The data for this project includes environmental samples collected at stations arranged in a grid, as well as top predator sightings collected along transects between stations (Figure 1).\n\n\n\nFigure 1: Survey effort of the Antarctic Peninsula Winter Community project. Darker reds indicate greater transect coverage (in nautical miles), while less survey effort took place in paler purple cells.\n\n\nThe project structure consists of the following:\n\nA GitHub repo with the analysis code\nA directory of Quarto documents describing each stage of the exploratory analysis\nA landing page with links to the Quarto outputs\n\nFor example, the Predators Quarto document describes the predator sighting data, including a table of the five most abundant species (Figure 2).\n\n\n\nFigure 2: An example of a data summary in an Antarctic Peninsula Winter Community project Quarto document.\n\n\nI use these documents for two reasons. First, they help me park downhill. It’s common when exploring a dataset to put it down for a day, a week, or even a year while you focus on something else (field work, classes, and so on). When you resume data exploration, it takes a while to reacquaint yourself with the data and the code, and generally remember where you left off. Quarto keeps your notes and figures in the same document as the code, which helps you figure out how to jump back in. It’s like parking your car downhill: you spend less time and energy getting moving again after stopping.\nThe second reason I like using Quarto this way is these documents serve as raw material for 1-on-1 meetings with my supervisor. The day before our bi-weekly meetings, I’ll send him a project update email with links to new figures or tables. The documents keep those outputs in context with the rest of the data exploration, making it easier for my supervisor to give me in depth feedback on what I’ve done and plan next steps together. You can do the same thing a lot of other ways, like in an email thread or a running Google Doc. But I like Quarto because it means my updates are all happening in one place, rather than forcing me to update code, figures, and notes separately - which can easily get out of sync!"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/index.html#communicating-your-science",
+    "href": "posts/2023-04-24-why-quarto/index.html#communicating-your-science",
+    "title": "Why Quarto?",
+    "section": "Communicating your science",
+    "text": "Communicating your science\nI’ve shown you how Quarto documents can create reports in HTML format, for sharing online. But it has a lot of other output formats, too, including PDFs for submitting journal articles and presentation slides. In fact, this blog post doubled as a lab meeting presentation, and you can find the source code for that presentation here.\nTechnical writing (like writing a manuscript for a journal) in Quarto has a learning curve, but I think it’s worth it. Once you’ve gone through co-author edits and reviewer comments a few times, you’ll get tired of updating Fig. 2 to Fig. 3 in five different places over and over again. In Quarto, you cross-reference figures and equations with a descriptive identifier and it handles it for you. The code below generates a figure and identifies it as fig-regression. Then I can cross-reference it with @fig-regression: Figure 3. Quarto generates the figure numbers for me, I don’t have to worry about it.\n\nlibrary(tidyverse)\n\n\n```{r}\n#| label: fig-regression\n#| fig-cap: y is correlated with x, isn't that swell?\n\nset.seed(1057)\ndat <- tibble(\n  x = runif(25),\n  y = 3 * x + 1 + rnorm(25)\n)\nggplot(dat, aes(x, y)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", formula = y ~ x) +\n  theme_classic()\n```\n\n\n\n\nFigure 3: y is correlated with x, isn’t that swell?\n\n\n\n\nIn addition to cross-references, Quarto will take care of your bibliography, too. Let’s say I want to cite a paper from my dissertation. I look it up and find the DOI: 10.3389/fphys.2022.917976. In my Quarto document, I type @10.3389/fphys.2022.917976 and RStudio launches a window with the article details. The citation shows up like this: Czapanskiy and Beltran (2022). Quarto adds it to my bibliography file and updates my works cited list accordingly. No manually tracking citations or interfacing with a reference manager required!"
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/index.html#bonus-points",
+    "href": "posts/2023-04-24-why-quarto/index.html#bonus-points",
+    "title": "Why Quarto?",
+    "section": "Bonus points",
+    "text": "Bonus points\nMaking the jump from student/post-doc to a permanent position in science is rough. A crucial, but often overlooked, part of that is establishing your professional identity (or your brand, ew gross). Quarto can help with that, too! Your research and publications are the most important part of that, but you need to market yourself, too, to a certain extent. Your personal website should bring together all the different parts of your professional identity so people can find you easily. Want to be considered for an invited talk or get an interview for a coveted job? Your website should make it easy for the decision makers to pick you. NCEAS’ Samantha Csik wrote a great tutorial on how to build a website using Quarto. An undergraduate in the Beltran Lab built their personal website using Quarto and a graduate student built a course website using it. You can do it, too! If you want help getting started, you know where to find me <3."
+  },
+  {
+    "objectID": "posts/2023-04-24-why-quarto/index.html#recap",
+    "href": "posts/2023-04-24-why-quarto/index.html#recap",
+    "title": "Why Quarto?",
+    "section": "Recap",
+    "text": "Recap\n\nQuarto documents integrate code, text, figures, and more\nUse them to track your data analysis and collaborate with others\nAlso good for technical writing, websites, and so much more!"
+  },
+  {
     "objectID": "posts/2023-03-09-osfr-data/index.html",
     "href": "posts/2023-03-09-osfr-data/index.html",
     "title": "Uploading data to OSF in R",
@@ -144,7 +242,7 @@
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "Renewing a GitHub PAT\n\n\n\nR\n\n\ngit\n\n\nGitHub\n\n\n\nWhat to do when your GitHub personal access token (PAT) expires.\n\n\n\nMax Czapanskiy\n\n\nApr 11, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython and R together with reticulate\n\n\n\nR\n\n\nPython\n\n\nreticulate\n\n\nSCRUBs\n\n\n\nIntro to reticulate lesson for SCRUBs\n\n\n\nMax Czapanskiy\n\n\nMar 17, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUploading data to OSF in R\n\n\n\nR\n\n\nOSF\n\n\nreproducibility\n\n\n\nI’m learning to navigate the Open Science Framework (OSF), but ran into issues uploading a directory to my project. Here’s how I did it in R.\n\n\n\nMax Czapanskiy\n\n\nMar 9, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Why Quarto?\n\n\n\nR\n\n\nQuarto\n\n\n\nUse quarto documents for reproducible analyses, science communication, and more!\n\n\n\nMax Czapanskiy\n\n\nApr 24, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRenewing a GitHub PAT\n\n\n\nR\n\n\ngit\n\n\nGitHub\n\n\n\nWhat to do when your GitHub personal access token (PAT) expires.\n\n\n\nMax Czapanskiy\n\n\nApr 11, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython and R together with reticulate\n\n\n\nR\n\n\nPython\n\n\nreticulate\n\n\nSCRUBs\n\n\n\nIntro to reticulate lesson for SCRUBs\n\n\n\nMax Czapanskiy\n\n\nMar 17, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUploading data to OSF in R\n\n\n\nR\n\n\nOSF\n\n\nreproducibility\n\n\n\nI’m learning to navigate the Open Science Framework (OSF), but ran into issues uploading a directory to my project. Here’s how I did it in R.\n\n\n\nMax Czapanskiy\n\n\nMar 9, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tutorials/git-and-github.html",
