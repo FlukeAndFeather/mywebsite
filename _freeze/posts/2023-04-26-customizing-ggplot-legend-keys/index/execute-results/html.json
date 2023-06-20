@@ -1,0 +1,16 @@
+{
+  "hash": "39360247a47a2c5601e736e482c19a26",
+  "result": {
+    "markdown": "---\ntitle: Customizing ggplot legend keys\ndescription: For when you want e.g. small points on the plot but large keys in the legend\nauthor:\n  - name: Max Czapanskiy\nformat: html\nimage: legend.png\ndate: 2023-04-26\ncategories: [R, ggplot, dataviz]\n---\n\n\nSometimes it makes sense for your data representation in the figure to be a little different than the legend. For example, here's a cloud of data from two clusters represented as small, semi-transparent points. The small, semi-transparent aesthetic works when you have a bunch of points next to each other, but isolated as they are in the legend the keys just look washed out.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsuppressMessages(library(tidyverse))\n\n# Two sets of points with offset distributions\nn <- 500\nmany_points <- rbind(\n  tibble(x = runif(n, 0, 4),\n         y = 3 * x + 3 + rnorm(n, sd = 6),\n         cluster = \"A\"),\n  tibble(x = runif(n, 1, 5),\n         y = 6 * x - 6 + rnorm(n, sd = 4),\n         cluster = \"B\")\n)\n\np <- ggplot(many_points, aes(x, y, color = cluster)) +\n  geom_point(alpha = 0.5) +\n  scale_color_brewer(palette = \"Accent\") +\n  theme_classic(base_size = 18) +\n  theme(legend.position = \"top\")\n\np\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=400px}\n:::\n:::\n\n\nManually over-riding the aesthetic to make the legend points larger and remove the transparency improves interpretation (at least in my opinion). We do that by adding `guides()` to the ggplot. In this case, it's the color legend I want to change, so I set the `color` parameter to a new `guide_legend()`, which has an `override.aes` parameter I can use to redefine aesthetics using a `list` (those aesthetics being `alpha` and `size` here). I think this is much easier to interpret.\n\n\n::: {.cell}\n\n```{.r .cell-code}\np +\n  guides(color = guide_legend(override.aes = list(alpha = 1, size = 3)))\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=400px}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

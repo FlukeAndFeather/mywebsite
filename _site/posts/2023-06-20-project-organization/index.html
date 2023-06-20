@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Max Czapanskiy">
+<meta name="dcterms.date" content="2023-06-20">
+<meta name="description" content="Keeping code, data, and manuscripts organized is a notorious challenge for scientists. This workflow will get you started with some early project organization wins that help you track your progress and collaborate with others.">
+
+<title>Max Czapanskiy | Ecology and Data Science - A simple project organization workflow</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Max Czapanskiy | Ecology and Data Science</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching.html" rel="" target="">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../research.html" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pubs.html" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">A simple project organization workflow</h1>
+                  <div>
+        <div class="description">
+          Keeping code, data, and manuscripts organized is a notorious challenge for scientists. This workflow will get you started with some early project organization wins that help you track your progress and collaborate with others.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">soft skills; RStudio; GitHub</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Max Czapanskiy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 20, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-pieces" id="toc-the-pieces" class="nav-link active" data-scroll-target="#the-pieces">The pieces</a>
+  <ul class="collapse">
+  <li><a href="#guiding-principles" id="toc-guiding-principles" class="nav-link" data-scroll-target="#guiding-principles">Guiding principles</a></li>
+  <li><a href="#use-github" id="toc-use-github" class="nav-link" data-scroll-target="#use-github">Use GitHub</a></li>
+  <li><a href="#pick-a-folder-organization-system" id="toc-pick-a-folder-organization-system" class="nav-link" data-scroll-target="#pick-a-folder-organization-system">Pick a folder organization system</a></li>
+  <li><a href="#raw-data-are-sacrosanct" id="toc-raw-data-are-sacrosanct" class="nav-link" data-scroll-target="#raw-data-are-sacrosanct">Raw data are sacrosanct</a></li>
+  <li><a href="#share-reports" id="toc-share-reports" class="nav-link" data-scroll-target="#share-reports">Share reports</a></li>
+  </ul></li>
+  <li><a href="#the-workflow" id="toc-the-workflow" class="nav-link" data-scroll-target="#the-workflow">The workflow</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="the-pieces" class="level1">
+<h1>The pieces</h1>
+<section id="guiding-principles" class="level2">
+<h2 class="anchored" data-anchor-id="guiding-principles">Guiding principles</h2>
+<ul>
+<li><p><em>Reproducibility</em>. You or another scientist should be able to repeat your analysis.</p></li>
+<li><p><em>Maintainability</em>. You should be able to jump back in to editing your analysis, even if you haven’t looked at it in a while.</p></li>
+<li><p><em>Collaboration</em>. You should be able to share your analysis methods and results with others.</p></li>
+</ul>
+<p>Those principles sound nice, but how do we actually implement them in practice? You’ve probably been told to “comment your code”, but that’s insufficient guidance. Inspired by the British Ecological Society’s <a href="http://hdl.handle.net/10141/622618"><em>A Guide to Reproducible Code in Ecology and Evolution</em></a>, this post walks you through the basics of setting up your project for success.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/650880532" frameborder="0" allow="autoplay; title=" "="" fullscreen;="" picture-in-picture"="" allowfullscreen=""></iframe></div>
+</section>
+<section id="use-github" class="level2">
+<h2 class="anchored" data-anchor-id="use-github">Use GitHub</h2>
+<p>The virtues of version control for scientists have been well covered by others (<a href="https://doi.org/10.1371/journal.pcbi.1005510">10.1371/journal.pcbi.1005510</a>, <a href="https://doi.org/10.1080/00031305.2017.1399928">10.1080/00031305.2017.1399928</a>). The core functionality of GitHub is version control, but there are even more reasons scientists should adopt it. I strongly recommend reading Braga et al.&nbsp;(2023) for more details. For now, I want to emphasize a feature I use all the time for collaboration: website hosting. Every GitHub repository gets an associated website, which you can combine with authoring tools like R Markdown and Quarto to easily share project reports. This is my primary method for sharing progress with collaborators and it’s so easy to do.</p>
+</section>
+<section id="pick-a-folder-organization-system" class="level2">
+<h2 class="anchored" data-anchor-id="pick-a-folder-organization-system">Pick a folder organization system</h2>
+<p>It’s less important which system you pick than it is to stick with it. I use the system recommended by Annna Krystalli in the <em>Organising projects for reproducibility</em> chapter of the BES guide, with a few edits. Some of the following comes from there verbatim.</p>
+<ul>
+<li><p>The <code>data</code> folder contains all input data (and metadata) used in the analysis.</p></li>
+<li><p>The <code>paper</code> folder contains the manuscript.</p></li>
+<li><p>The <code>figs</code> directory contains figures generated by the analysis.</p></li>
+<li><p>The <code>output</code> folder contains any type of intermediate or output files (e.g.&nbsp;simulation outputs, models, processed datasets, etc.). You might separate this and also have a cleaned-data folder.</p></li>
+<li><p>The <code>R</code> directory contains R scripts with function definitions.</p></li>
+<li><p>The <code>reports</code> folder contains Quarto files that document the analysis or report on results.</p></li>
+<li><p>The <code>docs</code> folder contains the rendered versions of the reports.</p></li>
+<li><p>The <code>scratch</code> folder contains early prototypes and other code I don’t fully understand.</p></li>
+<li><p>The scripts that actually do things are stored in the root directory, but if your project has many scripts, you might want to organize them in a directory of their own.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/folderstructure.jpg" class="img-fluid figure-img" alt="A file organization system for your analyses." width="400"></p>
+<figcaption class="figure-caption">A file organization system for your analyses.</figcaption>
+</figure>
+</div>
+<p>The biggest benefit of adopting this system is the cognitive space it frees up in your brain. Any brainpower you were devoting to figuring out where to put a file or where to find something can now be reallocated to your actual science.</p>
+<p>As an added benefit, you’ll also do away with absolute path errors. If your code contains absolute file paths, like <code>/Users/YourNameHere/Documents/MyThesis/…</code>, then it won’t work on another machine. That violates reproducibility and makes collaboration difficult! This system keeps your analysis in one folder and uses <a href="https://r4ds.had.co.nz/workflow-projects.html">RStudio projects</a>, which means you’ll be using relative file paths. R will look for files relative to the .Rproj file, so e.g.&nbsp;<code>data/surveys/forest.csv</code> refers to the same file on any computer.</p>
+</section>
+<section id="raw-data-are-sacrosanct" class="level2">
+<h2 class="anchored" data-anchor-id="raw-data-are-sacrosanct">Raw data are sacrosanct</h2>
+<p>Never touch your raw data. Ever. Seriously. Smarter people than us say so (<a href="https://doi.org/10.1080/00031305.2017.1375989">10.1080/00031305.2017.1375989</a>). Put your raw data and all the metadata you need to use it in <code>data/</code> and make any edits you need in code. You can save out the changed versions to <code>output/</code>. It might seem easier to open up Excel to add a column or change a cell. Don’t be tempted. Only madness lies down that path.</p>
+</section>
+<section id="share-reports" class="level2">
+<h2 class="anchored" data-anchor-id="share-reports">Share reports</h2>
+<p>If you use R or Python, learn <a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto</a>. In a single document, you’ll interweave text, code, figures, and tables. This is the best way to track your progress and share it with others. Quarto documents will create HTML outputs that you can share on your project’s website through GitHub. Here’s <a href="https://flukeandfeather.github.io/antwincomm/04_pred_clus.html">an example</a> from one of my projects. Even though my supervisor doesn’t use GitHub, they can still see my project’s progress and give me feedback. This is <em>so much better</em> than tangled email threads! It also helps gets new collaborators up to speed and you can reuse large chunks when you’re writing your manuscript.</p>
+</section>
+</section>
+<section id="the-workflow" class="level1">
+<h1>The workflow</h1>
+<ol type="1">
+<li>Create a repository for your project on GitHub</li>
+<li>Create an RStudio project from your repository</li>
+<li>Set up your folder structure</li>
+<li>Create a report</li>
+<li>Turn on website hosting in your GitHub repository</li>
+<li>Publish your report</li>
+</ol>
+<p>That’s enough to get you started and will make your projects way easier to manage and share. But there’s also a lot more you can start taking advantage of once you get this workflow under your belt.</p>
+<ul>
+<li><p>Turn your analyses into R packages. This makes your code way more reusable and helps track dependencies.</p></li>
+<li><p>Write your manuscript in Quarto. In addition to HTML, Quarto can output to PDFs and Word documents. When you put your code directly into your manuscript, it becomes much easier to manage citations, cross-reference figures and tables, and make revisions.</p></li>
+<li><p>Use more of GitHub’s project management features. If your projects start to include many more collaborators, Issues and Discussions will really help you keep track of decisions and edits. And the Fork-Pull Request workflow allows multiple people to edit code asynchronously.</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

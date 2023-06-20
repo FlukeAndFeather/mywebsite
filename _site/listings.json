@@ -2,6 +2,8 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/2023-06-20-project-organization/index.html",
+      "/posts/2023-04-26-customizing-ggplot-legend-keys/index.html",
       "/posts/2023-04-24-why-quarto/index.html",
       "/posts/2023-04-11-renew-pat/index.html",
       "/posts/2023-03-17-intro-reticulate/index.html",
