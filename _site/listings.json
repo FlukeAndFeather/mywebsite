@@ -2,6 +2,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/2023-10-20-customizing-ggplot-components/index.html",
       "/posts/2023-06-20-project-organization/index.html",
       "/posts/2023-04-26-customizing-ggplot-legend-keys/index.html",
       "/posts/2023-04-24-why-quarto/index.html",

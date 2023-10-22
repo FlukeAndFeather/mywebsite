@@ -1,0 +1,117 @@
+---
+title: Customizing ggplot components
+description: ggplot commands are good for 99% of figure customizations, but sometimes you need to edit individual plot components manually. Here's how.
+author:
+  - name: Max Czapanskiy
+format: html
+date: 2023-10-20
+image: ice_coverage.jpg
+categories: [R, ggplot, dataviz]
+---
+
+I'm working on the figures for a community ecology study and I want to use the same color scheme for the three communities in both geometries and text. It's easy to assign colors to geometries, but can be harder for text. In this example, I have a bar plot faceted by community, and I want the strip labels to match the colors I use to represent the communities in other figures.
+
+First, let's load some packages and data.
+
+```{r}
+library(grid)
+library(tidyverse)
+stations_clust <- readRDS("stations_clust.rds")
+```
+
+Now we create the figure without color-coding text. From top to bottom, we have three communities (**Open water**, **Marginal ice**, and **Pack ice**) and their sea ice coverage associations. In my other figures I've color-code their geometries as [**green**]{style="color: #1B9E77"}, [**orange**]{style="color: #D95F02"}, and [**purple**]{style="color: #7570B3"}. I'd like to make my facet strip labels use the same colors here.
+
+```{r}
+median_coverge <- stations_clust %>%
+  drop_na(ice_coverage) %>%
+  group_by(pred_clust) %>%
+  summarize(median_ice = median(ice_coverage / 10, na.rm = TRUE))
+
+p <- stations_clust %>% 
+  drop_na(ice_coverage) %>% 
+  ggplot(aes(x = ice_coverage / 10, fill = after_stat(x))) +
+  geom_histogram(bins = 20, color = "grey30") +
+  geom_vline(aes(xintercept = median_ice),
+             median_coverge,
+             color = "red", linetype = "dashed") +
+  scale_x_continuous(labels = scales::percent) +
+  scale_fill_distiller(palette = "Blues", guide = NULL) +
+  facet_grid(rows = vars(pred_clust)) +
+  labs(x = "Ice coverage",
+       y = "# sites") +
+  theme_minimal(base_size = 14) +
+  theme(strip.text = element_text(face = "bold"))
+p
+```
+
+ggplot will let me format *all* the facet strip labels using `theme()`, however individually formatting them is unsupported (as far as I'm aware). So we're going to look into the ggplot object's guts and manually adjust things. Here's how that works.
+
+## Force ggplot to generate the plot
+
+Calling `ggplot()` only defines the plot at a relatively high level. We need ggplot to actually generate all the plot elements (axes, geometries, legends, etc) before we can start mucking around with them. We do that by calling the `grid` package's `grid.force()` on the plot's *grob* (ggplot lingo for a *gr*aphical *ob*ject).
+
+```{r}
+#| output: false
+g <- p %>% 
+  ggplotGrob() %>% 
+  grid.force()
+```
+
+Notice `ggplot` and `grob` objects are different classes.
+
+```{r}
+class(ggplot())
+class(ggplotGrob(ggplot()))
+```
+
+## Find the relevant grobs
+
+Now we can look inside to see how ggplot is rendering the facet strip labels and start changing the graphical parameters (like color). The grobs within the plot are arranged in a tree-like structure. For example, legend labels are part of the legend are part of the overall layout. So each grob has both a *name* (the leaf of the tree) and a *path* (the sequence of branches leading to the leaf). Extract those like this.
+
+```{r}
+# Get the names and paths of grobs
+grob_ls <- grid.ls(g, print = FALSE)
+grob_names <- grob_ls$name
+grob_paths <- grob_ls$gPath
+```
+
+If you examine `grob_paths` you'll get an idea of how the tree is organized. Here we see 18 grobs contain the word "strip" in the path. I've appended the grob names at the end to show the grob leaves and branches together. You may need to scroll to the right to see the whole thing.
+
+```{r}
+contains_strip <- str_detect(grob_paths, "strip")
+paste(grob_paths[contains_strip], grob_names[contains_strip], sep = "::")
+```
+
+These grobs include the three strip parents (`[1]`, `[7]`, and `[13]`), each of which has multiple children. The grob that actually contains the graphical parameters we want to edit have name like "GRID.text.\*" (which I only figured out through trial and error, that's not immediately obvious).
+
+## Edit the grobs
+
+Knowing *where* the grobs we want to change are, we can change their graphical parameters.
+
+```{r}
+# This gets the names of the GRID.text grobs for the strip titles
+strip_names <- str_subset(
+  grob_names[str_detect(grob_paths, "strip.text.*titleGrob")],
+  "GRID.text"
+)
+
+# I want to change the colors of the strip titles to match the Dark2 palette
+txt_colors <- RColorBrewer::brewer.pal(3, "Dark2")
+for (i in 1:3) {
+  # THIS IS THE KEY PART
+  g <- editGrob(grob = g,
+                # Even though the parameter is called gPath, you just give it
+                # the grob's name.
+                gPath = strip_names[i], 
+                # Use gpar() to change the graphical parameter
+                gp = gpar(col = txt_colors[i]))
+}
+```
+
+## Success!
+
+Now the colors of my strip label text match the other figures in my paper.
+
+```{r}
+grid.draw(g)
+```
