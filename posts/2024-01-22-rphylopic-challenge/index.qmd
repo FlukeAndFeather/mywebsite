@@ -1,0 +1,121 @@
+---
+title: rphylopic challenge
+description: A data visualization challenge that uses rphylopic to add animal silhouettes to ggplot figures.
+author:
+  - name: Max Czapanskiy
+format: html
+date: 2024-01-22
+image: rphylopicchallenge.png
+categories: [R, ggplot, dataviz, challenges]
+bibliography: references.bib
+---
+
+Data visualization challenge! We're going to use [rphylopic](https://rphylopic.palaeoverse.org/) [@rphylopic] to find silhouettes of our study species and add them to a ggplot figure.
+
+```{r}
+#| label: setup
+#| include: false
+
+library(rphylopic)
+library(tidyverse)
+library(wiqid)
+data(KillarneyBirds)
+
+```
+
+```{r}
+#| label: plot
+#| echo: false
+#| out-width: 65%
+
+# The bird names are in the row names - convert them to a column.
+# Use tibble::rownames_to_column
+killarney <- rownames_to_column(KillarneyBirds, "bird")
+
+# Find pictures for chaffinch, robin, and blue tit
+# Use rphylopic::pick_phylopic
+chaffinch_pic <- get_phylopic("0b72dd38-2dc1-4675-990e-a46259855ce1")
+robin_pic <- get_phylopic("3c4ef873-76b5-473d-a740-8fcb4864462b")
+bluetit_pic <- get_phylopic("069c4833-e1ac-48e7-90d5-f7bd11000588")
+
+# Plot chaffinch, robin, and blue tit abundances in Yew habitat
+# Use a column plot and theme_classic()
+# Make the fills chaffinch = #9D6C56, robin = #AE7834, and blue tit = #263765
+# Hint: use scale_fill_manual()
+p <- filter(killarney, bird %in% c("Chaffinch", "Robin", "BlueTit")) %>% 
+  ggplot(aes(bird, Yew)) +
+  geom_col(aes(fill = bird)) +
+  scale_fill_manual(values = c(Chaffinch = "#9D6C56",
+                               Robin = "#AE7834",
+                               BlueTit = "#263765")) +
+  theme_classic()
+
+# Add phylopics on inside top of columns. Make them white so they stand out.
+# Use rphylopic::add_phylopic
+# Hint 1: use parameters x, y, ysize, and fill
+# Hint 2: You can use text for x position and you can calculate y position from
+# the data.
+p2 <- p +
+  add_phylopic(bluetit_pic, 
+               x = "BlueTit",
+               y = killarney$Yew[killarney$bird == "BlueTit"] - 1.1,
+               ysize = 2,
+               fill = "white") +
+  add_phylopic(chaffinch_pic, 
+               x = "Chaffinch",
+               y = killarney$Yew[killarney$bird == "Chaffinch"] - 1.1,
+               ysize = 2,
+               fill = "white") +
+  add_phylopic(robin_pic, 
+               x = "Robin",
+               y = killarney$Yew[killarney$bird == "Robin"] - 1.1,
+               ysize = 2,
+               fill = "white")
+
+# Rename the x-axis to "Bird" and remove the legend
+p3 <- p2 +
+  labs(x = "Bird") +
+  theme(legend.position = "none")
+p3
+
+
+```
+
+For this challenge, you'll need the following packages:
+
+-   `tidyverse`
+
+-   `rphylopic`
+
+-   `wiqid` (for bird abundance data)
+
+Make sure to install any you don't have.
+
+## The challenge
+
+### Load packages and data
+
+``` r
+library(rphylopic)
+library(tidyverse)
+library(wiqid)
+data(KillarneyBirds)
+```
+
+### Tidy the data
+
+Explore the data, e.g., with `view()` or `glimpse()`. Notice how the bird names aren't in their own column? Use `tibble::rownames_to_column()` to fix that.
+
+### Find silhouettes
+
+Find silhouettes for the chaffinch, robin, and blue tit. Use `rphylopic::pick_phylopic()`. This is an interactive way to find silhouettes for your study species.
+
+### Create figure
+
+1.  Plot just the chaffinch, robin, and blue tit abundances in Yew habitat. Use a column plot and `theme_classic()`. For your column fills, use chaffinch = #9D6C56, robin = #AE7834, and blue tit = #263765. Hint: use `scale_fill_manual()`.
+2.  Add phylopics on inside top of columns. Make them white so they stand out. Use `rphylopic::add_phylopic()`.
+    1.  Hint 1: use parameters x, y, ysize, and fill
+    2.  Hint 2: You can use text for x position and you can calculate y position from the data.
+3.  That's about it! To clean it up, rename the x-axis to "Bird" and remove the legend.
+
+How does it look? Does your figure match mine?

@@ -1,0 +1,16 @@
+{
+  "hash": "aa777de5d03377f264b80899f40833ac",
+  "result": {
+    "markdown": "---\ntitle: rphylopic challenge\ndescription: A data visualization challenge that uses rphylopic to add animal silhouettes to ggplot figures.\nauthor:\n  - name: Max Czapanskiy\nformat: html\ndate: 2024-01-22\nimage: rphlyopicchallenge.png\ncategories: [R, ggplot, dataviz, challenges]\nbibliography: references.bib\n---\n\n\nData visualization challenge! We're going to use [rphylopic](https://rphylopic.palaeoverse.org/) [@rphylopic] to find silhouettes of our study species and add them to a ggplot figure.\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/plot-1.png){width=65%}\n:::\n:::\n\n\nFor this challenge, you'll need the following packages:\n\n-   `tidyverse`\n\n-   `rphylopic`\n\n-   `wiqid` (for bird abundance data)\n\nMake sure to install any you don't have.\n\n## The challenge\n\n### Load packages and data\n\n``` r\nlibrary(rphylopic)\nlibrary(tidyverse)\nlibrary(wiqid)\ndata(KillarneyBirds)\n```\n\n### Tidy the data\n\nExplore the data, e.g., with `view()` or `glimpse()`. Notice how the bird names aren't in their own column? Use `tibble::rownames_to_column()` to fix that.\n\n### Find silhouettes\n\nFind silhouettes for the chaffinch, robin, and blue tit. Use `rphylopic::pick_phylopic()`. This is an interactive way to find silhouettes for your study species.\n\n### Create figure\n\n1.  Plot chaffinch, robin, and blue tit abundances in Yew habitat. Use a column plot and `theme_classic()`. For your column fills, use chaffinch = #9D6C56, robin = #AE7834, and blue tit = #263765. Hint: use `scale_fill_manual()`.\n2.  Add phylopics on inside top of columns. Make them white so they stand out. Use `rphylopic::add_phylopic()`.\n    1.  Hint 1: use parameters x, y, ysize, and fill\n    2.  Hint 2: You can use text for x position and you can calculate y position from the data.\n3.  That's about it! To clean it up, rename the x-axis to \"Bird\" and remove the legend.\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
