@@ -16,6 +16,8 @@ format_authors <- function(authors) {
   # Split authors' names (First MI Last or First Last)
   authors_split <- stringr::str_split(authors, " ")
   # Format as Last, FI. or Last, FI.MI.
+  # Two-word last names indicated by underscore, must be post-processed
+  sub2 <- function(x, pattern, replacement) sub(pattern, replacement, x)
   authors_formatted <- purrr::map_chr(
     authors_split,
     function(parts) {
@@ -30,7 +32,8 @@ format_authors <- function(authors) {
                 substr(parts[1], 1, 1))
       }
     }
-  )
+  ) |>
+    sub2("_", " ")
   # Shorten long author lists
   if (length(authors_formatted) > 7) {
     authors_short <- c(authors_formatted[1:5], 
@@ -47,6 +50,9 @@ format_authors <- function(authors) {
 
 # Find path to PDF file
 find_pdf <- function(authors, year, title) {
+  if (year == "In press") {
+    return(NA)
+  }
   lead_author <- stringr::str_extract(authors[1], "[^ ]+$")
   title_short <- title |>
     stringr::str_replace_all("[^a-zA-Z \\-]", "") |>
@@ -57,6 +63,11 @@ find_pdf <- function(authors, year, title) {
       ignore.case = TRUE) |>
     (\(pdf) file.path("assets", "papers", pdf))()
 }
+create_pdf_link <- function(pdf) {
+  ifelse(is.na(pdf), 
+         "", 
+         glue::glue(" <a href=\"{pdf}\" target=\"_blank\">PDF</a>"))
+}
 
 # Read bib file
 pubs <- bib2df::bib2df("assets/works.bib") |>
@@ -65,12 +76,13 @@ pubs <- bib2df::bib2df("assets/works.bib") |>
     authors = purrr::map_chr(AUTHOR, format_authors),
     title = TITLE,
     journal = JOURNAL,
-    year = YEAR,
-    pdf = purrr::pmap_chr(list(AUTHOR, YEAR, TITLE), find_pdf)
+    year = ifelse(YEAR == 9999, "In press", YEAR),
+    pdf = purrr::pmap_chr(list(AUTHOR, year, TITLE), find_pdf),
+    note = ifelse(is.na(NOTE), "", paste0(" ", NOTE))
   ) |>
   # Format in HTML. Markdown doesn't support reverse ordered lists??
   dplyr::mutate(
-    pub_html = glue::glue("<li>{authors}. ({year}). {title}. <em>{journal}</em>. <a href=\"{pdf}\" target=\"_blank\">PDF</a></li>")
+    pub_html = glue::glue("<li>{authors} ({year}). {title}. <em>{journal}</em>.{note}{create_pdf_link(pdf)}</li>")
   ) |>
   dplyr::pull(pub_html)
 # Reverse ordered list
